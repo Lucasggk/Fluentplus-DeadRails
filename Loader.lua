@@ -115,31 +115,34 @@ Tab:AddToggle("FlyToggle", {
 
 repeat task.wait() until game:IsLoaded()
 
-local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    :WaitForChild("BondGui")
-    :WaitForChild("BondInfo")
-    :WaitForChild("BondCount")
-
 local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
-
-local resultadoBox = BondsTab:AddParagraph({
-    Title = "Seu Bond:",
-    Content = bondLabel.Text or "N/A"
-})
-
-local bondTextBox = BondsTab:AddLabel({
-    Title = "Texto do Bond:",
-    Content = bondLabel.Text or "N/A"
-})
 
 task.spawn(function()
     while true do
         task.wait(0.5)
+
+        -- Verifica se bondLabel existe
+        local bondLabel = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+            :FindFirstChild("BondGui")
+            :FindFirstChild("BondInfo")
+            :FindFirstChild("BondCount")
+
         if bondLabel then
+            local resultadoBox = BondsTab:AddParagraph({
+                Title = "Seu Bond:",
+                Content = bondLabel.Text or "N/A"
+            })
+
+            local bondTextBox = BondsTab:AddLabel({
+                Title = "Texto do Bond:",
+                Content = bondLabel.Text or "N/A"
+            })
+
+            -- Atualiza o conteúdo do resultadoBox e bondTextBox a cada 0.5 segundos
             local currentText = bondLabel.Text or "N/A"
             pcall(function()
                 resultadoBox:SetText(currentText)
-                bondTextBox:SetText(currentText)  -- Atualiza o campo de texto
+                bondTextBox:SetText(currentText)
             end)
         end
     end
