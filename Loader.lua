@@ -1,7 +1,7 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 
-local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua", true))()
+local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "Meu Script",
@@ -14,12 +14,15 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true
 })
 
-local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
+local Tab = Window:AddTab({
+    Title = "testes",
+    Icon = "home"
+})
 
 local defaultTpPos = Vector3.new(100, 10, 200)
 local currentTpPos = defaultTpPos
 
-Tab:AddLabel("——— Tps ———")
+Tab:AddLabel("Tps")
 
 Tab:AddButton({
     Title = "Teleportar",
@@ -48,10 +51,10 @@ Tab:AddButton({
     end
 })
 
-Tab:AddLabel("——— Slider ———")
+Tab:AddLabel("Slider")
 
 Tab:AddSlider("Slider", {
-    Title = "Slider",
+    Title = "Velocidade",
     Default = 16,
     Min = 10,
     Max = 150,
