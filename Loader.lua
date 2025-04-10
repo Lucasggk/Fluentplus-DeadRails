@@ -11,7 +11,7 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.LeftControl
 })
 
-local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
+local Tab = Window:AddTab({ Title = "testes", Icon = "rocket" })
 
 -- Botão de Teleport
 Tab:AddButton("Teleportar", {
