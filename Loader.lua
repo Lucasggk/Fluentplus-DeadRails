@@ -19,7 +19,7 @@ local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 Tab:AddButton({
     Title = "Teleportar",
     Callback = function()
-        local pos = Vector3.new(100, 100, 200)
+        local pos = Vector3.new(100, 10, 200)
         local char = game.Players.LocalPlayer.Character
         if char and char:FindFirstChild("HumanoidRootPart") then
             char:MoveTo(pos)
@@ -31,7 +31,7 @@ Tab:AddSlider("Speed", {
     Title = "Velocidade",
     Default = 16,
     Min = 10,
-    Max = 100,
+    Max = 150,
     Rounding = 1,
     Callback = function(Value)
         local char = game.Players.LocalPlayer.Character
