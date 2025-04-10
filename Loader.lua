@@ -63,25 +63,51 @@ Tab:AddSlider("Slider", {
     end
 })
 
-local flyAnim
+local flying = false
+local RS = game:GetService("RunService")
+local speed = 3
+local bv, bg, char, hrp, humanoid
 
-Tab:AddToggle("AnimaçãoVoo", {
-    Title = "Animação de Voar",
+Tab:AddToggle("FlyToggle", {
+    Title = "Fly (Analógico Mobile)",
     Default = false,
     Callback = function(state)
-        local char = game.Players.LocalPlayer.Character
-        if char and char:FindFirstChildOfClass("Humanoid") then
-            if state then
-                local anim = Instance.new("Animation")
-                anim.AnimationId = "rbxassetid://507771019" -- animação padrão de voar
-                flyAnim = char:FindFirstChildOfClass("Humanoid"):LoadAnimation(anim)
-                flyAnim:Play()
-            else
-                if flyAnim then
-                    flyAnim:Stop()
-                    flyAnim = nil
+        flying = state
+        char = game.Players.LocalPlayer.Character
+        if not char or not char:FindFirstChild("HumanoidRootPart") then return end
+        hrp = char:FindFirstChild("HumanoidRootPart")
+        humanoid = char:FindFirstChildWhichIsA("Humanoid")
+
+        if flying then
+            bv = Instance.new("BodyVelocity")
+            bv.Velocity = Vector3.zero
+            bv.MaxForce = Vector3.new(1e9, 1e9, 1e9)
+            bv.Parent = hrp
+
+            bg = Instance.new("BodyGyro")
+            bg.MaxTorque = Vector3.new(1e9, 1e9, 1e9)
+            bg.CFrame = hrp.CFrame
+            bg.Parent = hrp
+
+            humanoid.PlatformStand = true
+
+            RS:BindToRenderStep("Fly", Enum.RenderPriority.Input.Value, function()
+                local cam = workspace.CurrentCamera
+                local moveDir = humanoid.MoveDirection
+
+                if moveDir.Magnitude > 0 then
+                    bv.Velocity = cam.CFrame:VectorToWorldSpace(moveDir.Unit * speed)
+                else
+                    bv.Velocity = Vector3.zero
                 end
-            end
+
+                bg.CFrame = cam.CFrame
+            end)
+        else
+            RS:UnbindFromRenderStep("Fly")
+            if bv then bv:Destroy() end
+            if bg then bg:Destroy() end
+            if humanoid then humanoid.PlatformStand = false end
         end
     end
 })
