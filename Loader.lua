@@ -121,7 +121,6 @@ task.spawn(function()
     while true do
         task.wait(0.5)
 
-        -- Verifica se bondLabel existe
         local bondLabel = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
             :FindFirstChild("BondGui")
             :FindFirstChild("BondInfo")
@@ -138,11 +137,9 @@ task.spawn(function()
                 Content = bondLabel.Text or "N/A"
             })
 
-            -- Atualiza o conteúdo do resultadoBox e bondTextBox a cada 0.5 segundos
-            local currentText = bondLabel.Text or "N/A"
             pcall(function()
-                resultadoBox:SetText(currentText)
-                bondTextBox:SetText(currentText)
+                resultadoBox:SetText(bondLabel.Text or "N/A")
+                bondTextBox:SetText(bondLabel.Text or "N/A")
             end)
         end
     end
