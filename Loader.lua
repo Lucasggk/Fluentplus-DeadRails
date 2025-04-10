@@ -128,10 +128,15 @@ local resultadoBox = BondsTab:AddParagraph({
 })
 
 task.spawn(function()
+    local previousText = bondLabel.Text or "N/A"
     while true do
-        task.wait(0.5)  
-        pcall(function()
-            resultadoBox:SetText(bondLabel.Text or "N/A")  -- Atualiza o texto
-        end)
+        task.wait(0.5)
+        local currentText = bondLabel.Text or "N/A"
+        if currentText ~= previousText then
+            pcall(function()
+                resultadoBox:SetText(currentText)
+            end)
+            previousText = currentText
+        end
     end
 end)
