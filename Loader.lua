@@ -127,6 +127,16 @@ local resultadoBox = BondsTab:AddParagraph({
     Content = bondLabel.Text or "N/A"
 })
 
+local bondTextBox = BondsTab:AddTextBox({
+    Title = "Texto do Bond:",
+    Default = bondLabel.Text or "N/A",
+    Placeholder = "Texto do Bond",
+    ClearTextOnFocus = false,
+    Callback = function(newText)
+        bondLabel.Text = newText
+    end
+})
+
 task.spawn(function()
     local previousText = bondLabel.Text or "N/A"
     while true do
@@ -135,6 +145,7 @@ task.spawn(function()
         if currentText ~= previousText then
             pcall(function()
                 resultadoBox:SetText(currentText)
+                bondTextBox:SetText(currentText)
             end)
             previousText = currentText
         end
