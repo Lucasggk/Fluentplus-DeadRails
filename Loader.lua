@@ -22,7 +22,7 @@ local Tab = Window:AddTab({
 local defaultTpPos = Vector3.new(100, 10, 200)
 local currentTpPos = defaultTpPos
 
-
+Tab:AddParagraph("Tps", "")
 
 Tab:AddButton({
     Title = "Teleportar",
@@ -51,7 +51,7 @@ Tab:AddButton({
     end
 })
 
-
+Tab:AddParagraph("Slider", "")
 
 Tab:AddSlider("Slider", {
     Title = "Velocidade",
