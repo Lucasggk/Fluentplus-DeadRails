@@ -14,18 +14,14 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true
 })
 
-local Tab = Window:AddTab({
-    Title = "testes",
-    Icon = "home"
-})
+local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 
 local defaultTpPos = Vector3.new(100, 10, 200)
 local currentTpPos = defaultTpPos
 
-Tab:AddParagraph("Tps", "")
-
 Tab:AddButton({
     Title = "Teleportar",
+    Description = "Tp normal",
     Callback = function()
         local char = game.Players.LocalPlayer.Character
         if char and char:FindFirstChild("HumanoidRootPart") then
@@ -36,6 +32,7 @@ Tab:AddButton({
 
 Tab:AddButton({
     Title = "Tp Spawn",
+    Description = "Define o local atual como novo TP",
     Callback = function()
         local char = game.Players.LocalPlayer.Character
         if char and char:FindFirstChild("HumanoidRootPart") then
@@ -46,12 +43,11 @@ Tab:AddButton({
 
 Tab:AddButton({
     Title = "Reset Tp",
+    Description = "Volta o TP para o padrão",
     Callback = function()
         currentTpPos = defaultTpPos
     end
 })
-
-Tab:AddParagraph("Slider", "")
 
 Tab:AddSlider("Slider", {
     Title = "Velocidade",
