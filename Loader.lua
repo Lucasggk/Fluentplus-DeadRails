@@ -19,6 +19,8 @@ local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 local defaultTpPos = Vector3.new(100, 10, 200)
 local currentTpPos = defaultTpPos
 
+Tab:AddSection("Tps")
+
 Tab:AddButton({
     Title = "Teleportar",
     Callback = function()
@@ -45,6 +47,8 @@ Tab:AddButton({
         currentTpPos = defaultTpPos
     end
 })
+
+Tab:AddSection("slider")
 
 Tab:AddSlider("Speed", {
     Title = "Velocidade",
