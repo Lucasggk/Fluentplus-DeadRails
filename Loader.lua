@@ -120,10 +120,10 @@ local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
 local resultadoBox
 local bondTextBox
 
-task.spawn(function()
-    while true do
-        task.wait(0.5)
-
+BondsTab:AddButton({
+    Title = "Atualizar Bond",
+    Description = "Atualiza o valor do Bond.",
+    Callback = function()
         local bondLabel = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
             :FindFirstChild("BondGui")
             :FindFirstChild("BondInfo")
@@ -149,4 +149,4 @@ task.spawn(function()
             end
         end
     end
-end)
+})
