@@ -137,10 +137,15 @@ local bondTextBox = BondsTab:AddTextBox({
     end
 })
 
-bondLabel:GetPropertyChangedSignal("Text"):Connect(function()
-    local currentText = bondLabel.Text or "N/A"
-    pcall(function()
-        resultadoBox:SetText(currentText)
-        bondTextBox:SetText(currentText)
-    end)
+task.spawn(function()
+    while true do
+        task.wait(0.5)
+        if bondLabel then
+            local currentText = bondLabel.Text or "N/A"
+            pcall(function()
+                resultadoBox:SetText(currentText)
+                bondTextBox:SetText(currentText)
+            end)
+        end
+    end
 end)
