@@ -1,5 +1,6 @@
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
+Show_Button = false
 
 local Window = Fluent:CreateWindow({
     Title = "Meu Script",
