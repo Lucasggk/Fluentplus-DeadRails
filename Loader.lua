@@ -117,15 +117,16 @@ repeat task.wait() until game:IsLoaded()
 
 local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
 
-local resultadoBox
-local bondTextBox
+local resultadoBox = BondsTab:AddParagraph({
+    Title = "Seu Bond:",
+    Content = "N/A"
+})
 
-if not resultadoBox then
-    resultadoBox = BondsTab:AddParagraph({
-        Title = "Seu Bond:",
-        Content = "N/A"
-    })
-end
+local bondTextBox = BondsTab:AddTextBox({
+    Title = "Texto do Bond:",
+    Text = "N/A",
+    ClearTextOnFocus = false
+})
 
 BondsTab:AddButton({
     Title = "Atualizar Bond",
@@ -137,7 +138,8 @@ BondsTab:AddButton({
             :FindFirstChild("BondCount")
 
         if bondLabel then
-            resultadoBox:SetText(bondLabel.Text or "N/A")
+            resultadoBox.Content = bondLabel.Text or "N/A"
+            bondTextBox.Text = bondLabel.Text or "N/A"
         end
     end
 })
