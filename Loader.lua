@@ -120,6 +120,13 @@ local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
 local resultadoBox
 local bondTextBox
 
+if not resultadoBox then
+    resultadoBox = BondsTab:AddParagraph({
+        Title = "Seu Bond:",
+        Content = "N/A"
+    })
+end
+
 BondsTab:AddButton({
     Title = "Atualizar Bond",
     Description = "Atualiza o valor do Bond.",
@@ -130,23 +137,7 @@ BondsTab:AddButton({
             :FindFirstChild("BondCount")
 
         if bondLabel then
-            if not resultadoBox then
-                resultadoBox = BondsTab:AddParagraph({
-                    Title = "Seu Bond:",
-                    Content = bondLabel.Text or "N/A"
-                })
-            else
-                resultadoBox:SetText(bondLabel.Text or "N/A")
-            end
-
-            if not bondTextBox then
-                bondTextBox = BondsTab:AddLabel({
-                    Title = "Texto do Bond:",
-                    Content = bondLabel.Text or "N/A"
-                })
-            else
-                bondTextBox:SetText(bondLabel.Text or "N/A")
-            end
+            resultadoBox:SetText(bondLabel.Text or "N/A")
         end
     end
 })
