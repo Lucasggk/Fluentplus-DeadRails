@@ -17,29 +17,26 @@ local Window = Fluent:CreateWindow({
 local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 
 Tab:AddButton({
-    Title = "Teleport",
+    Title = "Teleportar",
     Callback = function()
         local pos = Vector3.new(100, 10, 200)
-        game.Players.LocalPlayer.Character:MoveTo(pos)
+        local char = game.Players.LocalPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            char:MoveTo(pos)
+        end
     end
 })
 
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local speedValue = 16
-
-Tab:AddSlider({
+Tab:AddSlider("Speed", {
     Title = "Velocidade",
-    Description = "Muda a velocidade do personagem",
-    Default = speedValue,
+    Default = 16,
     Min = 10,
     Max = 100,
     Rounding = 1,
-    Callback = function(value)
-        speedValue = value
-        local humanoid = player.Character and player.Character:FindFirstChildWhichIsA("Humanoid")
-        if humanoid then
-            humanoid.WalkSpeed = speedValue
+    Callback = function(Value)
+        local char = game.Players.LocalPlayer.Character
+        if char and char:FindFirstChildOfClass("Humanoid") then
+            char:FindFirstChildOfClass("Humanoid").WalkSpeed = Value
         end
     end
 })
