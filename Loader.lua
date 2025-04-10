@@ -113,9 +113,12 @@ Tab:AddToggle("FlyToggle", {
 })
 
 
-
+repeat task.wait() until game:IsLoaded()
 
 local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
+
+local resultadoBox
+local bondTextBox
 
 task.spawn(function()
     while true do
@@ -127,20 +130,23 @@ task.spawn(function()
             :FindFirstChild("BondCount")
 
         if bondLabel then
-            local resultadoBox = BondsTab:AddParagraph({
-                Title = "Seu Bond:",
-                Content = bondLabel.Text or "N/A"
-            })
-
-            local bondTextBox = BondsTab:AddLabel({
-                Title = "Texto do Bond:",
-                Content = bondLabel.Text or "N/A"
-            })
-
-            pcall(function()
+            if not resultadoBox then
+                resultadoBox = BondsTab:AddParagraph({
+                    Title = "Seu Bond:",
+                    Content = bondLabel.Text or "N/A"
+                })
+            else
                 resultadoBox:SetText(bondLabel.Text or "N/A")
+            end
+
+            if not bondTextBox then
+                bondTextBox = BondsTab:AddLabel({
+                    Title = "Texto do Bond:",
+                    Content = bondLabel.Text or "N/A"
+                })
+            else
                 bondTextBox:SetText(bondLabel.Text or "N/A")
-            end)
+            end
         end
     end
 end)
