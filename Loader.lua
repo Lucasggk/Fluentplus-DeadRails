@@ -51,7 +51,7 @@ Tab:AddButton({
     end
 })
 
-Tab:AddLabel("Slider")
+
 
 Tab:AddSlider("Slider", {
     Title = "Velocidade",
