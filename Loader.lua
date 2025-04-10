@@ -19,15 +19,14 @@ local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 Tab:AddButton({
     Title = "Teleport",
     Callback = function()
-        local pos = Vector3.new(100, 10, 200) -- Altere aqui a posição exata que quiser
+        local pos = Vector3.new(100, 10, 200)
         game.Players.LocalPlayer.Character:MoveTo(pos)
     end
 })
 
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
-
-local speedValue = 16 -- valor padrão
+local speedValue = 16
 
 Tab:AddSlider({
     Title = "Velocidade",
