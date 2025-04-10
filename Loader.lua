@@ -113,7 +113,7 @@ Tab:AddToggle("FlyToggle", {
 })
 
 
-repeat task.wait() until game:IsLoaded()
+
 
 local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
 
