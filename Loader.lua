@@ -16,14 +16,33 @@ local Window = Fluent:CreateWindow({
 
 local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 
+local defaultTpPos = Vector3.new(100, 10, 200)
+local currentTpPos = defaultTpPos
+
 Tab:AddButton({
     Title = "Teleportar",
     Callback = function()
-        local pos = Vector3.new(100, 10, 200)
         local char = game.Players.LocalPlayer.Character
         if char and char:FindFirstChild("HumanoidRootPart") then
-            char:MoveTo(pos)
+            char:MoveTo(currentTpPos)
         end
+    end
+})
+
+Tab:AddButton({
+    Title = "Tp Spawn",
+    Callback = function()
+        local char = game.Players.LocalPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            currentTpPos = char.HumanoidRootPart.Position
+        end
+    end
+})
+
+Tab:AddButton({
+    Title = "Reset Tp",
+    Callback = function()
+        currentTpPos = defaultTpPos
     end
 })
 
