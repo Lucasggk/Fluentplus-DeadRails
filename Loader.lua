@@ -19,3 +19,12 @@ Tab:AddButton({
         game.Players.LocalPlayer.Character:MoveTo(pos)
     end
 })
+
+local Tab = Window:Tab({Title = "Main", Icon = "rocket"})
+
+Tab:Toggle("Fly", {
+    Default = false,
+    Callback = function(state)
+        fly = state
+    end
+})
