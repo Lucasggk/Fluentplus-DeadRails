@@ -23,3 +23,24 @@ Tab:AddButton({
         game.Players.LocalPlayer.Character:MoveTo(pos)
     end
 })
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local speedValue = 16 -- valor padrão
+
+Tab:AddSlider({
+    Title = "Velocidade",
+    Description = "Muda a velocidade do personagem",
+    Default = speedValue,
+    Min = 10,
+    Max = 100,
+    Rounding = 1,
+    Callback = function(value)
+        speedValue = value
+        local humanoid = player.Character and player.Character:FindFirstChildWhichIsA("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = speedValue
+        end
+    end
+})
