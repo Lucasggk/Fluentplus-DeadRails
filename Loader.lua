@@ -127,14 +127,9 @@ local resultadoBox = BondsTab:AddParagraph({
     Content = bondLabel.Text or "N/A"
 })
 
-local bondTextBox = BondsTab:AddTextBox({
+local bondTextBox = BondsTab:AddLabel({
     Title = "Texto do Bond:",
-    Default = bondLabel.Text or "N/A",
-    Placeholder = "Texto do Bond",
-    ClearTextOnFocus = false,
-    Callback = function(newText)
-        bondLabel.Text = newText
-    end
+    Content = bondLabel.Text or "N/A"
 })
 
 task.spawn(function()
@@ -144,7 +139,7 @@ task.spawn(function()
             local currentText = bondLabel.Text or "N/A"
             pcall(function()
                 resultadoBox:SetText(currentText)
-                bondTextBox:SetText(currentText)
+                bondTextBox:SetText(currentText)  -- Atualiza o campo de texto
             end)
         end
     end
