@@ -1,54 +1,50 @@
-
-local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua", true))()
+local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua", true))()
 
 local Window = Fluent:CreateWindow({
     Title = "Meu Script By Lucas",
     SubTitle = "powered by Fluent",
     TabWidth = 160,
-    Size = UDim2.fromOffset(520, 400),
+    Size = UDim2.fromOffset(580, 400),
     Acrylic = true,
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
+    Center = true,
+    IsDraggable = true
 })
 
 local Tab = Window:AddTab({ Title = "testes", Icon = "rocket" })
 
--- Botão de Teleport
-Tab:AddButton("Teleportar", {
+Tab:AddButton({
     Title = "Teleport",
-    Description = "Clique para teleportar",
+    Description = "Clique para teleportar pra frente",
     Callback = function()
         local player = game.Players.LocalPlayer
-        if player.Character then
-            local hrp = player.Character:FindFirstChild("HumanoidRootPart")
-            if hrp then
-                -- Coord. de exemplo, edita aqui se quiser outro lugar
-                hrp.CFrame = CFrame.new(Vector3.new(0, 100, 0))
-            end
+        local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 10
         end
     end
 })
 
--- Toggle de Fly parado
 local fly = false
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local player = Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-Tab:AddToggle("FlyToggle", {
-    Title = "Fly Parado no Ar",
-    Description = "Ativa ou desativa o Fly parado",
+Tab:AddToggle("ToggleFly", {
+    Title = "Fly (visual)",
     Default = false,
     Callback = function(state)
         fly = state
-        humanoidRootPart.Anchored = fly
+        local player = game.Players.LocalPlayer
+        local hrp = player.Character and player.Character:WaitForChild("HumanoidRootPart")
+        if hrp then
+            hrp.Anchored = fly
+        end
     end
 })
 
-RunService.RenderStepped:Connect(function()
+game:GetService("RunService").RenderStepped:Connect(function()
     if fly then
-        humanoidRootPart.Anchored = true
+        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.Anchored = true
+        end
     end
 end)
