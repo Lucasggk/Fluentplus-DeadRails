@@ -120,9 +120,7 @@ local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     :WaitForChild("BondInfo")
     :WaitForChild("BondCount")
 
-
 local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
-
 
 local resultadoBox = BondsTab:AddParagraph({
     Title = "Seu Bond:",
@@ -130,9 +128,10 @@ local resultadoBox = BondsTab:AddParagraph({
 })
 
 task.spawn(function()
-    while task.wait(2) do
+    while true do
+        task.wait(0.5)  
         pcall(function()
-            resultadoBox:SetText(bondLabel.Text or "N/A")
+            resultadoBox:SetText(bondLabel.Text or "N/A")  -- Atualiza o texto
         end)
     end
 end)
