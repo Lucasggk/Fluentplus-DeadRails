@@ -22,11 +22,12 @@ Tab:AddButton({
 
 local fly = false
 
-testes:Button({
+testes:Toggle({
     Title = "Ativar/Desativar Fly",
-    Description = "Pressione para ativar ou desativar o modo de fly (ancorado)",
-    Callback = function()
-        fly = not fly
+    Description = "Você ficará parado no ar quando ativado.",
+    Default = false,
+    Callback = function(state)
+        fly = state
 
         local Players = game:GetService("Players")
         local RunService = game:GetService("RunService")
