@@ -20,3 +20,31 @@ Tab:AddButton({
     end
 })
 
+local fly = false
+
+testes:Button({
+    Title = "Ativar/Desativar Fly",
+    Description = "Pressione para ativar ou desativar o modo de fly (ancorado)",
+    Callback = function()
+        fly = not fly
+
+        local Players = game:GetService("Players")
+        local RunService = game:GetService("RunService")
+
+        local player = Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+        if fly then
+            humanoidRootPart.Anchored = true
+        else
+            humanoidRootPart.Anchored = false
+        end
+
+        RunService.RenderStepped:Connect(function()
+            if fly then
+                humanoidRootPart.Anchored = true
+            end
+        end)
+    end
+})
