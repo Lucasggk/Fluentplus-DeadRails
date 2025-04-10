@@ -63,25 +63,24 @@ Tab:AddSlider("Slider", {
     end
 })
 
-local FlyAnimTab = Window:AddTab({ Title = "", Icon = "activity" })
-
 local flyAnim
-FlyAnimTab:AddToggle("AnimaçãoVoo", {
+
+Tab:AddToggle("AnimaçãoVoo", {
     Title = "Animação de Voar",
     Default = false,
     Callback = function(state)
         local char = game.Players.LocalPlayer.Character
-        local hum = char:FindFirstChildOfClass("Humanoid")
-        if state then
-            local anim = Instance.new("Animation")
-            anim.AnimationId = "rbxassetid://6360382912"
-            flyAnim = hum:LoadAnimation(anim)
-            flyAnim.Priority = Enum.AnimationPriority.Action
-            flyAnim:Play()
-        else
-            if flyAnim then
-                flyAnim:Stop()
-                flyAnim = nil
+        if char and char:FindFirstChildOfClass("Humanoid") then
+            if state then
+                local anim = Instance.new("Animation")
+                anim.AnimationId = "rbxassetid://507771019" -- animação padrão de voar
+                flyAnim = char:FindFirstChildOfClass("Humanoid"):LoadAnimation(anim)
+                flyAnim:Play()
+            else
+                if flyAnim then
+                    flyAnim:Stop()
+                    flyAnim = nil
+                end
             end
         end
     end
