@@ -117,29 +117,13 @@ repeat task.wait() until game:IsLoaded()
 
 local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
 
-local resultadoBox = BondsTab:AddParagraph({
-    Title = "Seu Bond:",
-    Content = "N/A"
-})
-
 local bondTextBox = BondsTab:AddTextBox({
     Title = "Texto do Bond:",
     Text = "N/A",
     ClearTextOnFocus = false
 })
 
-BondsTab:AddButton({
-    Title = "Atualizar Bond",
-    Description = "Atualiza o valor do Bond.",
-    Callback = function()
-        local bondLabel = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-            :FindFirstChild("BondGui")
-            :FindFirstChild("BondInfo")
-            :FindFirstChild("BondCount")
-
-        if bondLabel then
-            resultadoBox.Content = bondLabel.Text or "N/A"
-            bondTextBox.Text = bondLabel.Text or "N/A"
-        end
-    end
+BondsTab:AddParagraph({
+    Title = "Nota:",
+    Content = "Este campo mostra apenas o número de bond no momento em que o script foi executado."
 })
