@@ -127,12 +127,14 @@ if bondLabel then
     bondCount = bondLabel.Text or "N/A"
 end
 
+-- Adicionando o TextBox
 local bondTextBox = BondsTab:AddTextBox({
     Title = "Texto do Bond:",
     Text = bondCount,
     ClearTextOnFocus = false
 })
 
+-- Adicionando o Paragraph
 BondsTab:AddParagraph({
     Title = "Nota:",
     Content = "Este campo mostra o número de bond no momento em que o script foi executado."
