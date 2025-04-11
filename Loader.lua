@@ -127,3 +127,13 @@ local resultadoBox = BondsTab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel.Text or "N/A"
 })
+
+-- Atualiza bondLabel a cada 0.5 segundos sem bloquear o restante do código
+task.spawn(function()
+    while true do
+        task.wait(0.5)  -- Espera 0.5 segundos antes de atualizar novamente
+        pcall(function()
+            resultadoBox:SetText(bondLabel.Text or "N/A")  -- Atualiza o texto
+        end)
+    end
+end)
