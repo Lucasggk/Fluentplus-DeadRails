@@ -190,12 +190,26 @@ local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
 repeat task.wait() until game:IsLoaded()
 
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+
+local function restorePlayerGui()
+    local player = game.Players.LocalPlayer
+    if not player:FindFirstChild("PlayerGui") then
+        local playerGui = Instance.new("PlayerGui")
+        playerGui.Name = "PlayerGui"
+        playerGui.Parent = player
+    end
+end
+
 tabpt:AddButton({
     Title = "Tp Tesla",
     Description = " TP para Tesla",
     Callback = function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/tptotesla.github.io/refs/heads/main/Tptotesla.lua'))()
-        game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.TouchGui, true)
+        task.wait(1)
+        StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+        restorePlayerGui()
     end
 })
 
@@ -204,6 +218,10 @@ tabpt:AddButton({
     Description = " TP para castelo",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/castletpfast.github.io/refs/heads/main/FASTCASTLE.lua"))()
-        game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.TouchGui, true)
+        task.wait(1)
+        StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+        restorePlayerGui()
     end
 })
+
+restorePlayerGui()
