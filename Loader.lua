@@ -211,3 +211,14 @@ tabpt:AddToggle("CastleToggle", {
         end
     end
 })
+
+tabpt:AddToggle("fortToggle", {
+    Title = "Tp fort",
+    Description = " TP para fort",
+    Default = false,
+    Callback = function(state)
+        if state then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tpfort.github.io/refs/heads/main/Tpfort.lua"))()
+            end
+    end
+})
