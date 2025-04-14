@@ -124,7 +124,7 @@ Tab:AddParagraph({
     Content = bondLabel and bondLabel.Text or "N/A"
 })
 
---eterna linha 116
+-- eterna linha 116
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
@@ -184,46 +184,13 @@ BondsTab:AddToggle("AimlockToggle", {
     end
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 repeat task.wait() until game:IsLoaded()
-
 
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
 repeat task.wait() until game:IsLoaded()
 
-tabtp:AddButton({
+tabpt:AddButton({
     Title = "Tp Tesla",
     Description = " TP para Tesla",
     Callback = function()
@@ -231,9 +198,10 @@ tabtp:AddButton({
     end
 })
 
-tabtp:AddButton({
+tabpt:AddButton({
     Title = "Tp castelo",
     Description = " TP para castelo",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/castletpfast.github.io/refs/heads/main/FASTCASTLE.lua"))()
+    end
 })
