@@ -183,3 +183,56 @@ BondsTab:AddToggle("AimlockToggle", {
         end
     end
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
+
+tabtp:AddButton({
+    Title = "Tp Tesla",
+    Description = " TP para Tesla",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/tptotesla.github.io/refs/heads/main/Tptotesla.lua'))()
+    end
+})
+
+tabtp:AddButton({
+    Title = "Tp castelo",
+    Description = " TP para castelo",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/castletpfast.github.io/refs/heads/main/FASTCASTLE.lua"))()
+})
