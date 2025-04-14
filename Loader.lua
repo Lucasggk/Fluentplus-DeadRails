@@ -119,17 +119,35 @@ local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     :WaitForChild("BondInfo")
     :WaitForChild("BondCount")
 
+--eterna linha 116
+repeat task.wait() until game:IsLoaded()
+
+local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
+
 local resultadoBox = BondsTab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel and bondLabel.Text or "N/A"
 })
 
+local player = game.Players.LocalPlayer
+local cam = workspace.CurrentCamera
 
-repeat task.wait() until game:IsLoaded() --eterna linha 116
+local function getClosestNPCTarget()
+    local closestTarget = nil
+    local shortestDistance = math.huge
 
+    for _, npc in pairs(workspace:GetDescendants()) do
+        if npc:IsA("Model") and npc:FindFirstChild("Humanoid") and npc:FindFirstChild("HumanoidRootPart") and not npc:FindFirstChildOfClass("Player") then
+            local distance = (cam.CFrame.Position - npc.HumanoidRootPart.Position).Magnitude
+            if distance < shortestDistance then
+                shortestDistance = distance
+                closestTarget = npc.HumanoidRootPart
+            end
+        end
+    end
 
-
-local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
+    return closestTarget
+end
 
 local aimlockEnabled = false
 local aimlockConnection
