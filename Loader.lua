@@ -1,3 +1,4 @@
+
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 
@@ -114,43 +115,40 @@ Tab:AddToggle("FlyToggle", {
 
 repeat task.wait() until game:IsLoaded()
 
+local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
+
 local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     :WaitForChild("BondGui")
     :WaitForChild("BondInfo")
     :WaitForChild("BondCount")
-
---eterna linha 116
-repeat task.wait() until game:IsLoaded()
-
-local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
 local resultadoBox = BondsTab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel and bondLabel.Text or "N/A"
 })
 
-local player = game.Players.LocalPlayer
-local cam = workspace.CurrentCamera
-
-local function getClosestNPCTarget()
-    local closestTarget = nil
-    local shortestDistance = math.huge
-
-    for _, npc in pairs(workspace:GetDescendants()) do
-        if npc:IsA("Model") and npc:FindFirstChild("Humanoid") and npc:FindFirstChild("HumanoidRootPart") and not npc:FindFirstChildOfClass("Player") then
-            local distance = (cam.CFrame.Position - npc.HumanoidRootPart.Position).Magnitude
-            if distance < shortestDistance then
-                shortestDistance = distance
-                closestTarget = npc.HumanoidRootPart
-            end
-        end
-    end
-
-    return closestTarget
-end
+--eterna linha 116
 
 local aimlockEnabled = false
 local aimlockConnection
+local cam = workspace.CurrentCamera
+local player = game.Players.LocalPlayer
+
+local function getClosestNPCTarget()
+    local closest
+    local shortest = math.huge
+    for _, npc in ipairs(workspace:GetDescendants()) do
+        if npc:IsA("Model") and npc:FindFirstChild("Humanoid") and npc:FindFirstChild("HumanoidRootPart") then
+            local pos = npc.HumanoidRootPart.Position
+            local distance = (cam.CFrame.Position - pos).Magnitude
+            if distance < shortest then
+                closest = npc.HumanoidRootPart
+                shortest = distance
+            end
+        end
+    end
+    return closest
+end
 
 local function startAimlock()
     aimlockConnection = RS.RenderStepped:Connect(function()
