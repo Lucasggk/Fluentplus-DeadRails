@@ -217,7 +217,7 @@ BondsTab:AddToggle("AimlockToggle", {
 
 
 
-
+repeat task.wait() until game:IsLoaded()
 
 
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
