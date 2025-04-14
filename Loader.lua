@@ -78,46 +78,46 @@ Tab:AddToggle("FlyToggle", {
         hrp = char:FindFirstChild("HumanoidRootPart")
         humanoid = char:FindFirstChildWhichIsA("Humanoid")
 
-        if flying then
-            bv = Instance.new("BodyVelocity")
-            bv.Velocity = Vector3.zero
-            bv.MaxForce = Vector3.new(1e9, 1e9, 1e9)
-            bv.Parent = hrp
+        if flying then  
+            bv = Instance.new("BodyVelocity")  
+            bv.Velocity = Vector3.zero  
+            bv.MaxForce = Vector3.new(1e9, 1e9, 1e9)  
+            bv.Parent = hrp  
 
-            bg = Instance.new("BodyGyro")
-            bg.MaxTorque = Vector3.new(1e9, 1e9, 1e9)
-            bg.CFrame = hrp.CFrame
-            bg.Parent = hrp
+            bg = Instance.new("BodyGyro")  
+            bg.MaxTorque = Vector3.new(1e9, 1e9, 1e9)  
+            bg.CFrame = hrp.CFrame  
+            bg.Parent = hrp  
 
-            humanoid.PlatformStand = true
+            humanoid.PlatformStand = true  
 
-            RS:BindToRenderStep("Fly", Enum.RenderPriority.Input.Value, function()
-                local cam = workspace.CurrentCamera
-                local moveDir = humanoid.MoveDirection
+            RS:BindToRenderStep("Fly", Enum.RenderPriority.Input.Value, function()  
+                local cam = workspace.CurrentCamera  
+                local moveDir = humanoid.MoveDirection  
 
-                if moveDir.Magnitude > 0 then
-                    bv.Velocity = cam.CFrame:VectorToWorldSpace(moveDir.Unit * speed)
-                else
-                    bv.Velocity = Vector3.zero
-                end
+                if moveDir.Magnitude > 0 then  
+                    bv.Velocity = cam.CFrame:VectorToWorldSpace(moveDir.Unit * speed)  
+                else  
+                    bv.Velocity = Vector3.zero  
+                end  
 
-                bg.CFrame = cam.CFrame
-            end)
-        else
-            RS:UnbindFromRenderStep("Fly")
-            if bv then bv:Destroy() end
-            if bg then bg:Destroy() end
-            if humanoid then humanoid.PlatformStand = false end
-        end
+                bg.CFrame = cam.CFrame  
+            end)  
+        else  
+            RS:UnbindFromRenderStep("Fly")  
+            if bv then bv:Destroy() end  
+            if bg then bg:Destroy() end  
+            if humanoid then humanoid.PlatformStand = false end  
+        end  
     end
 })
 
 repeat task.wait() until game:IsLoaded()
 
 local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    :WaitForChild("BondGui")
-    :WaitForChild("BondInfo")
-    :WaitForChild("BondCount")
+:WaitForChild("BondGui")
+:WaitForChild("BondInfo")
+:WaitForChild("BondCount")
 
 Tab:AddParagraph({
     Title = "Seu Bond:",
@@ -190,38 +190,24 @@ local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
 repeat task.wait() until game:IsLoaded()
 
-local StarterGui = game:GetService("StarterGui")
-StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
-
-local function restorePlayerGui()
-    local player = game.Players.LocalPlayer
-    if not player:FindFirstChild("PlayerGui") then
-        local playerGui = Instance.new("PlayerGui")
-        playerGui.Name = "PlayerGui"
-        playerGui.Parent = player
-    end
-end
-
-tabpt:AddButton({
+tabpt:AddToggle("TeslaToggle", {
     Title = "Tp Tesla",
     Description = " TP para Tesla",
-    Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/tptotesla.github.io/refs/heads/main/Tptotesla.lua'))()
-        task.wait(1)
-        StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
-        restorePlayerGui()
+    Default = false,
+    Callback = function(state)
+        if state then
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/tptotesla.github.io/refs/heads/main/Tptotesla.lua'))()
+        end
     end
 })
 
-tabpt:AddButton({
+tabpt:AddToggle("CastleToggle", {
     Title = "Tp castelo",
     Description = " TP para castelo",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/castletpfast.github.io/refs/heads/main/FASTCASTLE.lua"))()
-        task.wait(1)
-        StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
-        restorePlayerGui()
+    Default = false,
+    Callback = function(state)
+        if state then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/castletpfast.github.io/refs/heads/main/FASTCASTLE.lua"))()
+        end
     end
 })
-
-restorePlayerGui()
