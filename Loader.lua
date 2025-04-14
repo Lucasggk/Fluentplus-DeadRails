@@ -194,10 +194,8 @@ tabpt:AddButton({
     Title = "Tp Tesla",
     Description = " TP para Tesla",
     Callback = function()
-        pcall(function()
-            game:GetService("GuiService").TouchControlsEnabled = true
-        end)
         loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/tptotesla.github.io/refs/heads/main/Tptotesla.lua'))()
+        game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.TouchGui, true)
     end
 })
 
@@ -205,9 +203,7 @@ tabpt:AddButton({
     Title = "Tp castelo",
     Description = " TP para castelo",
     Callback = function()
-        pcall(function()
-            game:GetService("GuiService").TouchControlsEnabled = true
-        end)
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/castletpfast.github.io/refs/heads/main/FASTCASTLE.lua"))()
+        game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.TouchGui, true)
     end
 })
