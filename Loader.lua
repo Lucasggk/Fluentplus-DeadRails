@@ -226,26 +226,32 @@ tabpt:AddToggle("fortToggle", {
 local trainTab = Window:AddTab({ Title = "Train", Icon = "train" })
 
 trainTab:AddButton({
-    Title = "Viajar de Primeira Classe",
+    Title = "tp to train",
     Description = "Teleporta direto para o trem",
     Callback = function()
-        local train = workspace:FindFirstChild("Train") or workspace:WaitForChild("Train")
+        task.spawn(function()
+            for i = 1, 4 do
+                local train = workspace:FindFirstChild("Train") or workspace:WaitForChild("Train")
 
-        local function getVehicleSeat()
-            for _, v in pairs(train:GetDescendants()) do
-                if v:IsA("VehicleSeat") then
-                    return v
+                local function getVehicleSeat()
+                    for _, v in pairs(train:GetDescendants()) do
+                        if v:IsA("VehicleSeat") then
+                            return v
+                        end
+                    end
+                    return nil
                 end
-            end
-            return nil
-        end
 
-        local seat = getVehicleSeat()
-        if seat then
-            local char = game.Players.LocalPlayer.Character
-            if char and char:FindFirstChild("HumanoidRootPart") then
-                char:MoveTo(seat.Position + Vector3.new(0, 5, 0))
+                local seat = getVehicleSeat()
+                if seat then
+                    local char = game.Players.LocalPlayer.Character
+                    if char and char:FindFirstChild("HumanoidRootPart") then
+                        char:MoveTo(seat.Position + Vector3.new(0, 5, 0))
+                    end
+                end
+
+                task.wait(0.5)
             end
-        end
+        end)
     end
 })
