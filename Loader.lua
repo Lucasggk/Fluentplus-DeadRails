@@ -112,7 +112,6 @@ Tab:AddToggle("FlyToggle", {
     end
 })
 
-    
 repeat task.wait() until game:IsLoaded()
 
 local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -120,12 +119,16 @@ local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     :WaitForChild("BondInfo")
     :WaitForChild("BondCount")
 
-
-local BondsTab = Window:AddTab({ Title = "bonds", Icon = "list" })
-
-
 local resultadoBox = BondsTab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel and bondLabel.Text or "N/A"
 })
+
+
+repeat task.wait() until game:IsLoaded() --eterna linha 116
+
+
+
+local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
+
 
