@@ -131,4 +131,38 @@ repeat task.wait() until game:IsLoaded() --eterna linha 116
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
+local aimlockEnabled = false
+local aimlockConnection
 
+local function startAimlock()
+    aimlockConnection = RS.RenderStepped:Connect(function()
+        local target = getClosestNPCTarget()
+        if target then
+            local char = player.Character
+            if char and char:FindFirstChild("HumanoidRootPart") then
+                local direction = (target.Position - cam.CFrame.Position).Unit
+                cam.CFrame = CFrame.lookAt(cam.CFrame.Position, cam.CFrame.Position + direction)
+            end
+        end
+    end)
+end
+
+local function stopAimlock()
+    if aimlockConnection then
+        aimlockConnection:Disconnect()
+        aimlockConnection = nil
+    end
+end
+
+BondsTab:AddToggle("AimlockToggle", {
+    Title = "Aimlock (NPC)",
+    Default = false,
+    Callback = function(state)
+        aimlockEnabled = state
+        if aimlockEnabled then
+            startAimlock()
+        else
+            stopAimlock()
+        end
+    end
+})
