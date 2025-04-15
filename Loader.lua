@@ -8,7 +8,7 @@ local Window = Fluent:CreateWindow({
     SubTitle = "By Lucas",
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
-    Acrylic = true,
+    Acrylic = false,
     Theme = "Dark",
     Center = true,
     IsDraggable = true
@@ -222,6 +222,18 @@ tabpt:AddToggle("fortToggle", {
             end
     end
 })
+
+tabpt:AddToggle("starlingtoggle", {
+    Title = "Tp starling",
+    Description = " TP para starling",
+    Default = false,
+    Callback = function(state)
+        if state then
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/sterlingnotifcation.github.io/refs/heads/main/Sterling.lua'))()
+            end
+    end
+})
+
 
 local trainTab = Window:AddTab({ Title = "Train", Icon = "train" })
 
