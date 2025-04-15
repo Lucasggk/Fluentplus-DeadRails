@@ -4,6 +4,7 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
+  button_icon = "car"
     Title = "Meu Script",
     SubTitle = "By Lucas",
     TabWidth = 160,
