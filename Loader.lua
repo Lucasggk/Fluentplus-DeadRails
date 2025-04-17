@@ -134,58 +134,44 @@ local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
 -- repeat task.wait() until game:IsLoaded()
 
-tabpt:AddToggle("TeslaToggle", {
+
+tabpt:AddButton("TeslaButton", {
     Title = "Tp Tesla",
     Description = " TP para Tesla",
-    Default = false,
-    Callback = function(state)
-        if state then
-            loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/tptotesla.github.io/refs/heads/main/Tptotesla.lua'))()
-        end
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/tptotesla.github.io/refs/heads/main/Tptotesla.lua'))()
     end
 })
 
-tabpt:AddToggle("CastleToggle", {
+tabpt:AddButton("CastleButton", {
     Title = "Tp castelo",
     Description = " TP para castelo",
-    Default = false,
-    Callback = function(state)
-        if state then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/castletpfast.github.io/refs/heads/main/FASTCASTLE.lua"))()
-        end
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/castletpfast.github.io/refs/heads/main/FASTCASTLE.lua"))()
     end
 })
 
-tabpt:AddToggle("fortToggle", {
+tabpt:AddButton("fortButton", {
     Title = "Tp fort",
     Description = " TP para fort",
-    Default = false,
-    Callback = function(state)
-        if state then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tpfort.github.io/refs/heads/main/Tpfort.lua"))()
-            end
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tpfort.github.io/refs/heads/main/Tpfort.lua"))()
     end
 })
 
-tabpt:AddToggle("starlingtoggle", {
+tabpt:AddButton("starlingButton", {
     Title = "Tp starling",
     Description = " TP para starling",
-    Default = false,
-    Callback = function(state)
-        if state then
-            loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/sterlingnotifcation.github.io/refs/heads/main/Sterling.lua'))()
-            end
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/sterlingnotifcation.github.io/refs/heads/main/Sterling.lua'))()
     end
 })
 
-tabpt:AddToggle("banktoggle", {
+tabpt:AddButton("bankButton", {
     Title = "Tp Bank",
     Description = " TP para o banco mais próximo",
-    Default = false,
-    Callback = function(state)
-        if state then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tptobank.github.io/refs/heads/main/Banktp.lua"))()
-            end
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tptobank.github.io/refs/heads/main/Banktp.lua"))()
     end
 })
 
