@@ -126,14 +126,14 @@ Tab:AddParagraph({
 
 -- eterna linha 116
 
-Tab:AddParagraph({
-    Title = "teste",
-    Content = "se aparecer isso, e porquê o aimbot esta sendo criado ainda"
-})
+
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
- 
+ Tab:AddParagraph({
+    Title = "teste",
+    Content = "se aparecer isso, e porquê o aimbot esta sendo criado ainda"
+})
 
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
