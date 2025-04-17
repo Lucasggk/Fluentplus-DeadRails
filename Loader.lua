@@ -126,11 +126,14 @@ Tab:AddParagraph({
 
 -- eterna linha 116
 
-
+Tab:AddParagraph({
+    Title = "teste",
+    Content = "se aparecer isso, e porquê o aimbot esta sendo criado ainda"
+})
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
- BondsTab:AddLabel("aimbot em desenvolvimento.\nespere ele ser criado para uso.")
+ 
 
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
