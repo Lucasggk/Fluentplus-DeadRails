@@ -134,7 +134,7 @@ local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
 -- repeat task.wait() until game:IsLoaded()
 
-tabpt:AddLabel("estruturas")
+
 
 tabpt:AddButton({
     Title = "Tp Tesla",
