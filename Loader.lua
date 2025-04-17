@@ -126,7 +126,7 @@ Tab:AddParagraph({
 
 -- eterna linha 116
 
-repeat task.wait() until game:IsLoaded()
+
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
