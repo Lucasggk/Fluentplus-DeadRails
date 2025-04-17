@@ -128,8 +128,136 @@ Tab:AddParagraph({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
+repeat task.wait() until game:IsLoaded()
 
+-- Configuração inicial
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local runService = game:GetService("RunService")
+local camera = workspace.CurrentCamera
 
+-- Configuração da UI
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/.../bondslib.lua"))() -- Substitua pelo link real
+local Window = Library:CreateWindow("Seu Hack Menu")
+local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
+
+-- Variáveis do NPC Lock
+local npcLock = false
+local lastTarget = nil
+local toggleLoop
+
+-- Funções auxiliares
+local function adicionarDestaque()
+    if player.Character then
+        local highlight = player.Character:FindFirstChild("PlayerHighlightESP")
+        if not highlight then
+            highlight = Instance.new("Highlight")
+            highlight.Name = "PlayerHighlightESP"
+            highlight.FillColor = Color3.new(1, 0, 0) -- Vermelho
+            highlight.OutlineColor = Color3.new(1, 1, 1)
+            highlight.FillTransparency = 0.5
+            highlight.OutlineTransparency = 0
+            highlight.Parent = player.Character
+        end
+    end
+end
+
+local function removerDestaque()
+    if player.Character and player.Character:FindFirstChild("PlayerHighlightESP") then
+        player.Character.PlayerHighlightESP:Destroy()
+    end
+end
+
+local function encontrarNPCMaisProximo()
+    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+        return nil
+    end
+    
+    local npcMaisProximo = nil
+    local menorDistancia = math.huge
+    local posicaoJogador = player.Character.HumanoidRootPart.Position
+
+    for _, objeto in ipairs(workspace:GetDescendants()) do
+        if objeto:IsA("Model") then
+            local humanoid = objeto:FindFirstChildOfClass("Humanoid")
+            local hrp = objeto:FindFirstChild("HumanoidRootPart") or objeto.PrimaryPart
+            
+            if humanoid and hrp and humanoid.Health > 0 then
+                -- Verificar se não é um jogador
+                local ehJogador = false
+                for _, jogador in ipairs(Players:GetPlayers()) do
+                    if jogador.Character == objeto then
+                        ehJogador = true
+                        break
+                    end
+                end
+                
+                if not ehJogador then
+                    local distancia = (hrp.Position - posicaoJogador).Magnitude
+                    if distancia < menorDistancia then
+                        menorDistancia = distancia
+                        npcMaisProximo = objeto
+                    end
+                end
+            end
+        end
+    end
+
+    return npcMaisProximo
+end
+
+-- Adicionar o toggle ao BondsTab
+BondsTab:AddToggle({
+    Title = "NPC Lock",
+    Default = false,
+    Callback = function(estado)
+        npcLock = estado
+        
+        -- Limpar conexão existente
+        if toggleLoop then
+            toggleLoop:Disconnect()
+        end
+        
+        if npcLock then
+            toggleLoop = runService.RenderStepped:Connect(function()
+                local npc = encontrarNPCMaisProximo()
+                
+                if npc and npc:FindFirstChildOfClass("Humanoid") then
+                    local humanoidNPC = npc:FindFirstChildOfClass("Humanoid")
+                    if humanoidNPC.Health > 0 then
+                        camera.CameraSubject = humanoidNPC
+                        lastTarget = npc
+                        adicionarDestaque()
+                    else
+                        lastTarget = nil
+                        removerDestaque()
+                        camera.CameraSubject = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+                    end
+                else
+                    camera.CameraSubject = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+                    lastTarget = nil
+                    removerDestaque()
+                end
+            end)
+        else
+            -- Resetar quando desligado
+            camera.CameraSubject = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+            removerDestaque()
+        end
+    end
+})
+
+-- Configuração adicional (opcional)
+BondsTab:AddButton({
+    Title = "Resetar Câmera",
+    Callback = function()
+        if player.Character then
+            camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
+        end
+    end
+})
+
+print("Menu Aimbot carregado com sucesso!")
 
 
 repeat task.wait() until game:IsLoaded()
