@@ -230,7 +230,10 @@ trainTab:AddButton({
 
 repeat task.wait() until game:IsLoaded()
 
-local andtab = window:addtab{( Title = "end game", Icon = "list" })
+local andtab = window:addtab({
+    Title = "end game",
+    Icon = "list"
+})
 
 andtab:AddButton({
     Title = "Tp to end",
@@ -239,12 +242,6 @@ andtab:AddButton({
     Callback = function(state)
         if state then
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
-            end
+        end
     end
 })
-
-
-
-
-
-
