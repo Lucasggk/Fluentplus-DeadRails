@@ -232,6 +232,8 @@ repeat task.wait() until game:IsLoaded()
 
 local andtab = wimdow:addtab{( Title = "end game", Icon = "list" })
 
+repeat task.wait() until game:IsLoaded()
+
 andtab:AddButton("endButton", {
     Title = "Tp to end",
     Description = " TP para o final",
