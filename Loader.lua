@@ -114,11 +114,15 @@ Tab:AddToggle("FlyToggle", {
 
 -- repeat task.wait() until game:IsLoaded()
 
-local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-:WaitForChild("BondGui")
-:WaitForChild("BondInfo")
-:WaitForChild("BondCount")
+local bondLabel
+pcall(function()
+    bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("BondGui"):WaitForChild("BondInfo"):WaitForChild("BondCount")
+end)
 
+Tab:AddParagraph({
+    Title = "Seu Bond:",
+    Content = bondLabel and bondLabel.Text or "N/A"
+})
 Tab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel and bondLabel.Text or "N/A"
