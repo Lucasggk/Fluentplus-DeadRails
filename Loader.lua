@@ -227,6 +227,9 @@ trainTab:AddButton({
     end
 })
 
+
+repeat task.wait() until game:IsLoaded()
+
 local andtab = wimdow:addtab{( Title = "end game", Icon = "list" })
 
 andtab:AddButton("endButton", {
