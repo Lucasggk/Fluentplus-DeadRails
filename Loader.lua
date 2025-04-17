@@ -128,7 +128,7 @@ Tab:AddParagraph({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-
+repeat task.wait() until game:IsLoaded()
 bondstab:AddParagraph("Aimbot", "Aqui em aimbot não tem nada por enquanto.")
 
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
