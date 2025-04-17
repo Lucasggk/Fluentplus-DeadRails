@@ -130,7 +130,7 @@ BondsTab:AddParagraph({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
- Tab:AddParagraph({
+ BondsTab:AddParagraph({
     Title = "teste",
     Content = "se aparecer isso, e porquê o aimbot esta sendo criado ainda"
 })
