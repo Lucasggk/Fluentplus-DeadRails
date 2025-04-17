@@ -292,7 +292,29 @@ tabpt:AddToggle("starlingtoggle", {
     end
 })
 
+tabpt:AddToggle("banktoggle", {
+    Title = "Tp Bank",
+    Description = " TP para o banco mais próximo",
+    Default = false,
+    Callback = function(state)
+        if state then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tptobank.github.io/refs/heads/main/Banktp.lua"))()
+            end
+    end
+})
 
+tabpt:AddToggle("endtoggle", {
+    Title = "Tp to end",
+    Description = " TP para o final",
+    Default = false,
+    Callback = function(state)
+        if state then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
+            end
+    end
+})
+ 
+ 
 local trainTab = Window:AddTab({ Title = "Train", Icon = "train" })
 
 trainTab:AddButton({
