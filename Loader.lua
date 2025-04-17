@@ -160,7 +160,6 @@ tabpt:AddButton({
     end
 })
 
-tabpt:AddLabel("cidade abandonada")
 
 tabpt:AddButton({
     Title = "Tp starling",
