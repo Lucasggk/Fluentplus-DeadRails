@@ -135,7 +135,7 @@ local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 -- repeat task.wait() until game:IsLoaded()
 
 
-tabpt:AddButton("TeslaButton", {
+tabpt:AddButton({
     Title = "Tp Tesla",
     Description = " TP para Tesla",
     Callback = function()
@@ -143,7 +143,7 @@ tabpt:AddButton("TeslaButton", {
     end
 })
 
-tabpt:AddButton("CastleButton", {
+tabpt:AddButton({
     Title = "Tp castelo",
     Description = " TP para castelo",
     Callback = function()
@@ -151,7 +151,7 @@ tabpt:AddButton("CastleButton", {
     end
 })
 
-tabpt:AddButton("fortButton", {
+tabpt:AddButton({
     Title = "Tp fort",
     Description = " TP para fort",
     Callback = function()
@@ -159,7 +159,7 @@ tabpt:AddButton("fortButton", {
     end
 })
 
-tabpt:AddButton("starlingButton", {
+tabpt:AddButton({
     Title = "Tp starling",
     Description = " TP para starling",
     Callback = function()
@@ -167,7 +167,7 @@ tabpt:AddButton("starlingButton", {
     end
 })
 
-tabpt:AddButton("bankButton", {
+tabpt:AddButton({
     Title = "Tp Bank",
     Description = " TP para o banco mais próximo",
     Callback = function()
