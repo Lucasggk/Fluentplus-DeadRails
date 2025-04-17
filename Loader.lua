@@ -244,7 +244,7 @@ andtab:AddButton({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-tabpt:AddToggle("AimLockToggle", {
+BondsTab:AddToggle("AimLockToggle", {
     Title = "AimLock NPC",
     Description = "Tranca a câmera no NPC mais próximo",
     Default = false,
