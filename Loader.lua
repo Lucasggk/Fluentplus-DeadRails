@@ -123,10 +123,6 @@ Tab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel and bondLabel.Text or "N/A"
 })
-Tab:AddParagraph({
-    Title = "Seu Bond:",
-    Content = bondLabel and bondLabel.Text or "N/A"
-})
 
 -- eterna linha 116
 
