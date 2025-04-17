@@ -128,60 +128,118 @@ Tab:AddParagraph({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-local player = game.Players.LocalPlayer
-local cam = workspace.CurrentCamera
 
-local function getClosestNPCTarget()
-    local closest, dist = nil, math.huge
-    for _, npc in pairs(workspace:GetDescendants()) do
-        if npc:IsA("Model") and npc:FindFirstChild("Humanoid") and npc:FindFirstChild("HumanoidRootPart") then
-            local screenPos, onScreen = cam:WorldToViewportPoint(npc.HumanoidRootPart.Position)
-            if onScreen then
-                local magnitude = (Vector2.new(screenPos.X, screenPos.Y) - Vector2.new(cam.ViewportSize.X / 2, cam.ViewportSize.Y / 2)).Magnitude
-                if magnitude < dist then
-                    closest = npc.HumanoidRootPart
-                    dist = magnitude
-                end
-            end
-        end
-    end
-    return closest
-end
-
-local aimlockEnabled = false
-local aimlockConnection
-
-local function startAimlock()
-    aimlockConnection = RS.RenderStepped:Connect(function()
-        local target = getClosestNPCTarget()
-        if target then
-            local char = player.Character
-            if char and char:FindFirstChild("HumanoidRootPart") then
-                local direction = (target.Position - cam.CFrame.Position).Unit
-                cam.CFrame = CFrame.lookAt(cam.CFrame.Position, cam.CFrame.Position + direction)
-            end
-        end
-    end)
-end
-
-local function stopAimlock()
-    if aimlockConnection then
-        aimlockConnection:Disconnect()
-        aimlockConnection = nil
-    end
-end
 
 BondsTab:AddToggle("AimlockToggle", {
     Title = "Aimlock (NPC)",
     Default = false,
     Callback = function(state)
-        aimlockEnabled = state
-        if aimlockEnabled then
-            startAimlock()
-        else
-            stopAimlock()
+        local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local runService = game:GetService("RunService")
+local camera = workspace.CurrentCamera
+
+local npcLock = false
+local lastTarget = nil
+local toggleLoop
+
+local function addPlayerHighlight()
+    if player.Character then
+        local highlight = player.Character:FindFirstChild("PlayerHighlightESP")
+        if not highlight then
+            highlight = Instance.new("Highlight")
+            highlight.Name = "PlayerHighlightESP"
+            highlight.FillColor = Color3.new(1, 1, 1)
+            highlight.OutlineColor = Color3.new(1, 1, 1)
+            highlight.FillTransparency = 0.5
+            highlight.OutlineTransparency = 0
+            highlight.Parent = player.Character
         end
     end
+end
+
+local function removePlayerHighlight()
+    if player.Character and player.Character:FindFirstChild("PlayerHighlightESP") then
+        player.Character.PlayerHighlightESP:Destroy()
+    end
+end
+
+local function getClosestNPC()
+    local closestNPC = nil
+    local closestDistance = math.huge
+
+    for _, object in ipairs(workspace:GetDescendants()) do
+        if object:IsA("Model") then
+            local humanoid = object:FindFirstChild("Humanoid") or object:FindFirstChildWhichIsA("Humanoid")
+            local hrp = object:FindFirstChild("HumanoidRootPart") or object.PrimaryPart
+            if humanoid and hrp and humanoid.Health > 0 and object.Name ~= "Horse" then
+                local isPlayer = false
+                for _, pl in ipairs(Players:GetPlayers()) do
+                    if pl.Character == object then
+                        isPlayer = true
+                        break
+                    end
+                end
+                if not isPlayer then
+                    local distance = (hrp.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                    if distance < closestDistance then
+                        closestDistance = distance
+                        closestNPC = object
+                    end
+                end
+            end
+        end
+    end
+
+    return closestNPC
+end
+
+local function toggleAimlock()
+    npcLock = not npcLock
+    if npcLock then
+        toggleLoop = runService.RenderStepped:Connect(function()
+            local npc = getClosestNPC()
+            if npc and npc:FindFirstChild("Humanoid") then
+                local npcHumanoid = npc:FindFirstChild("Humanoid")
+                if npcHumanoid.Health > 0 then
+                    camera.CameraSubject = npcHumanoid
+                    lastTarget = npc
+                    addPlayerHighlight()
+                else
+                    lastTarget = nil
+                    removePlayerHighlight()
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        camera.CameraSubject = player.Character:FindFirstChild("Humanoid")
+                    end
+                end
+            else
+                if player.Character and player.Character:FindFirstChild("Humanoid") then
+                    camera.CameraSubject = player.Character:FindFirstChild("Humanoid")
+                end
+                lastTarget = nil
+                removePlayerHighlight()
+            end
+        end)
+    else
+        if toggleLoop then
+            toggleLoop:Disconnect()
+            toggleLoop = nil
+        end
+        removePlayerHighlight()
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            camera.CameraSubject = player.Character:FindFirstChild("Humanoid")
+        end
+    end
+end
+
+button.MouseButton1Click:Connect(function()
+    toggleAimlock()
+    if npcLock then
+        button.Text = "Aimlock: ON"
+    else
+        button.Text = "Aimlock: OFF"
+    end
+end)
 })
 
 repeat task.wait() until game:IsLoaded()
