@@ -132,7 +132,7 @@ Tab:AddParagraph({
             
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
--- repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game:IsLoaded()
 
 
 tabpt:AddButton({
@@ -141,7 +141,6 @@ tabpt:AddButton({
     Callback = function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/tptotesla.github.io/refs/heads/main/Tptotesla.lua'))()
     end
- end
 })
 
 tabpt:AddButton({
