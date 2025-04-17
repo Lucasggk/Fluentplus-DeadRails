@@ -244,7 +244,7 @@ andtab:AddButton({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-                   tabpt:AddToggle("AimLockToggle", {
+tabpt:AddToggle("AimLockToggle", {
     Title = "AimLock NPC",
     Description = "Tranca a câmera no NPC mais próximo",
     Default = false,
@@ -255,17 +255,7 @@ local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
         local camera = workspace.CurrentCamera
 
         if not _G.AimLockData then
-            _G.AimLockData = {
-                Loop = nil,
-                Highlight = nil
-            }
-        end
-
-        local function removeHighlight()
-            if _G.AimLockData.Highlight then
-                _G.AimLockData.Highlight:Destroy()
-                _G.AimLockData.Highlight = nil
-            end
+            _G.AimLockData = { Loop = nil }
         end
 
         local function stopAimLock()
@@ -273,7 +263,6 @@ local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
                 _G.AimLockData.Loop:Disconnect()
                 _G.AimLockData.Loop = nil
             end
-            removeHighlight()
             if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
                 camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
             end
@@ -306,18 +295,8 @@ local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
                 
                 if closestNPC then
                     camera.CameraSubject = closestNPC:FindFirstChildOfClass("Humanoid")
-                    if not _G.AimLockData.Highlight then
-                        _G.AimLockData.Highlight = Instance.new("Highlight")
-                        _G.AimLockData.Highlight.Name = "PlayerHighlightESP"
-                        _G.AimLockData.Highlight.FillColor = Color3.new(1, 0, 0)
-                        _G.AimLockData.Highlight.OutlineColor = Color3.new(1, 1, 1)
-                        _G.AimLockData.Highlight.FillTransparency = 0.5
-                        _G.AimLockData.Highlight.OutlineTransparency = 0
-                        _G.AimLockData.Highlight.Parent = player.Character
-                    end
                 else
                     camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
-                    removeHighlight()
                 end
             end)
         end
