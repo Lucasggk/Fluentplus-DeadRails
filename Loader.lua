@@ -112,7 +112,7 @@ Tab:AddToggle("FlyToggle", {
     end
 })
 
-repeat task.wait() until game:IsLoaded()
+-- repeat task.wait() until game:IsLoaded()
 
 local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 :WaitForChild("BondGui")
@@ -134,7 +134,7 @@ local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
-repeat task.wait() until game:IsLoaded()
+-- repeat task.wait() until game:IsLoaded()
 
 tabpt:AddToggle("TeslaToggle", {
     Title = "Tp Tesla",
@@ -227,18 +227,15 @@ trainTab:AddButton({
     end
 })
 
-local andtab = window:addtab({
+local andtab = Window:AddTab({
     Title = "end game",
     Icon = "list"
 })
 
 andtab:AddButton({
     Title = "Tp to end",
-    Description = " TP para o final",
-    Default = false,
-    Callback = function(state)
-        if state then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
-        end
+    Description = "TP para o final",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
     end
 })
