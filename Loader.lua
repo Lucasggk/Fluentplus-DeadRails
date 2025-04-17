@@ -119,7 +119,7 @@ local bondLabel = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 :WaitForChild("BondInfo")
 :WaitForChild("BondCount")
 
-Tab:AddParagraph({
+BondsTab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel and bondLabel.Text or "N/A"
 })
