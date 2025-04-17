@@ -139,67 +139,86 @@ local npcLock = false
 local lastTarget = nil
 local toggleLoop
 
+-- Function to add highlight to player
+local function addPlayerHighlight()
+    if player.Character then
+        local highlight = player.Character:FindFirstChild("PlayerHighlightESP")
+        if not highlight then
+            highlight = Instance.new("Highlight")
+            highlight.Name = "PlayerHighlightESP"
+            highlight.FillColor = Color3.new(1, 1, 1)
+            highlight.OutlineColor = Color3.new(1, 1, 1)
+            highlight.FillTransparency = 0.5
+            highlight.OutlineTransparency = 0
+            highlight.Parent = player.Character
+        end
+    end
+end
+
+-- Function to remove player highlight
+local function removePlayerHighlight()
+    if player.Character and player.Character:FindFirstChild("PlayerHighlightESP") then
+        player.Character.PlayerHighlightESP:Destroy()
+    end
+end
+
+-- Function to get closest NPC
+local function getClosestNPC()
+    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+        return nil
+    end
+    
+    local closestNPC = nil
+    local closestDistance = math.huge
+    local playerPos = player.Character.HumanoidRootPart.Position
+
+    for _, object in ipairs(workspace:GetDescendants()) do
+        if object:IsA("Model") then
+            local humanoid = object:FindFirstChildOfClass("Humanoid")
+            local hrp = object:FindFirstChild("HumanoidRootPart") or object.PrimaryPart
+            
+            if humanoid and hrp and humanoid.Health > 0 and object.Name ~= "Horse" then
+                -- Check if it's not a player character
+                local isPlayer = false
+                for _, pl in ipairs(Players:GetPlayers()) do
+                    if pl.Character == object then
+                        isPlayer = true
+                        break
+                    end
+                end
+                
+                if not isPlayer then
+                    local distance = (hrp.Position - playerPos).Magnitude
+                    if distance < closestDistance then
+                        closestDistance = distance
+                        closestNPC = object
+                    end
+                end
+            end
+        end
+    end
+
+    return closestNPC
+end
+
 bondstab:AddToggle("NPCLockToggle", {
     Title = "NPC Lock",
     Default = false,
     Callback = function(state)
         npcLock = state
+        
+        -- Clean up existing connection if any
+        if toggleLoop then
+            toggleLoop:Disconnect()
+            toggleLoop = nil
+        end
+        
         if npcLock then
             toggleLoop = runService.RenderStepped:Connect(function()
-                local function addPlayerHighlight()
-                    if player.Character then
-                        local highlight = player.Character:FindFirstChild("PlayerHighlightESP")
-                        if not highlight then
-                            highlight = Instance.new("Highlight")
-                            highlight.Name = "PlayerHighlightESP"
-                            highlight.FillColor = Color3.new(1, 1, 1)
-                            highlight.OutlineColor = Color3.new(1, 1, 1)
-                            highlight.FillTransparency = 0.5
-                            highlight.OutlineTransparency = 0
-                            highlight.Parent = player.Character
-                        end
-                    end
-                end
-
-                local function removePlayerHighlight()
-                    if player.Character and player.Character:FindFirstChild("PlayerHighlightESP") then
-                        player.Character.PlayerHighlightESP:Destroy()
-                    end
-                end
-
-                local function getClosestNPC()
-                    local closestNPC = nil
-                    local closestDistance = math.huge
-
-                    for _, object in ipairs(workspace:GetDescendants()) do
-                        if object:IsA("Model") then
-                            local humanoid = object:FindFirstChild("Humanoid") or object:FindFirstChildWhichIsA("Humanoid")
-                            local hrp = object:FindFirstChild("HumanoidRootPart") or object.PrimaryPart
-                            if humanoid and hrp and humanoid.Health > 0 and object.Name ~= "Horse" then
-                                local isPlayer = false
-                                for _, pl in ipairs(Players:GetPlayers()) do
-                                    if pl.Character == object then
-                                        isPlayer = true
-                                        break
-                                    end
-                                end
-                                if not isPlayer then
-                                    local distance = (hrp.Position - player.Character.HumanoidRootPart.Position).Magnitude
-                                    if distance < closestDistance then
-                                        closestDistance = distance
-                                        closestNPC = object
-                                    end
-                                end
-                            end
-                        end
-                    end
-
-                    return closestNPC
-                end
-
                 local npc = getClosestNPC()
-                if npc and npc:FindFirstChild("Humanoid") then
-                    local npcHumanoid = npc:FindFirstChild("Humanoid")
+                
+                if npc and npc:FindFirstChildOfClass("Humanoid") then
+                    local npcHumanoid = npc:FindFirstChildOfClass("Humanoid")
                     if npcHumanoid.Health > 0 then
                         camera.CameraSubject = npcHumanoid
                         lastTarget = npc
@@ -207,29 +226,24 @@ bondstab:AddToggle("NPCLockToggle", {
                     else
                         lastTarget = nil
                         removePlayerHighlight()
-                        if player.Character and player.Character:FindFirstChild("Humanoid") then
-                            camera.CameraSubject = player.Character:FindFirstChild("Humanoid")
+                        if player.Character then
+                            camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
                         end
                     end
                 else
-                    if player.Character and player.Character:FindFirstChild("Humanoid") then
-                        camera.CameraSubject = player.Character:FindFirstChild("Humanoid")
+                    if player.Character then
+                        camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
                     end
                     lastTarget = nil
                     removePlayerHighlight()
                 end
             end)
         else
-            if toggleLoop then
-                toggleLoop:Disconnect()
-                toggleLoop = nil
+            -- Reset camera when toggled off
+            if player.Character then
+                camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
             end
-            if player.Character and player.Character:FindFirstChild("Humanoid") then
-                camera.CameraSubject = player.Character:FindFirstChild("Humanoid")
-            end
-            if player.Character and player.Character:FindFirstChild("PlayerHighlightESP") then
-                player.Character.PlayerHighlightESP:Destroy()
-            end
+            removePlayerHighlight()
         end
     end
 })
