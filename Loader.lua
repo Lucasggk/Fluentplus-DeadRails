@@ -130,7 +130,10 @@ Tab:AddParagraph({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-
+Bondstab:AddParagraph({
+    Title = "aimbot em criação",
+    Content = "o script de aimbot esta sendo criado ainda!."
+})
 
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
