@@ -134,6 +134,7 @@ local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
 -- repeat task.wait() until game:IsLoaded()
 
+tabpt:AddLabel("estruturas")
 
 tabpt:AddButton({
     Title = "Tp Tesla",
@@ -158,6 +159,8 @@ tabpt:AddButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tpfort.github.io/refs/heads/main/Tpfort.lua"))()
     end
 })
+
+tabpt:AddLabel("cidade abandonada")
 
 tabpt:AddButton({
     Title = "Tp starling",
