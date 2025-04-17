@@ -191,16 +191,7 @@ tabpt:AddToggle("banktoggle", {
     end
 })
 
-tabpt:AddToggle("endtoggle", {
-    Title = "Tp to end",
-    Description = " TP para o final",
-    Default = false,
-    Callback = function(state)
-        if state then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
-            end
-    end
-})
+
  
  
 local trainTab = Window:AddTab({ Title = "Train", Icon = "train" })
@@ -236,4 +227,15 @@ trainTab:AddButton({
     end
 })
 
-local andtab = wimdow:addtab{( Title = "end game", Icon = "end" })
+local andtab = wimdow:addtab{( Title = "end game", Icon = "list" })
+
+andtab:AddButton("endButton", {
+    Title = "Tp to end",
+    Description = " TP para o final",
+    Default = false,
+    Callback = function(state)
+        if state then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
+            end
+    end
+})
