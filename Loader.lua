@@ -130,21 +130,6 @@ Tab:AddParagraph({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-BondsTab:AddToggle({
-    Title = "Aimlock",
-    Description = "Gruda a mira na cabeça dos NPCs",
-    Default = false,
-    Callback = function(state)
-        if state then
-            local success, err = pcall(function()
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Aimlock/main/Loader.lua"))()
-            end)
-            if not success then
-                warn("Erro ao carregar o Aimlock: " .. err)
-            end
-        end
-    end
-})
 
             
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
