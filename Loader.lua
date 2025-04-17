@@ -130,88 +130,99 @@ Tab:AddParagraph({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-    BondsTab:AddToggle("AimLockToggle", {
+   BondsTab:AddToggle("AimLockToggle", {
     Title = "AimLock NPC",
     Description = "Tranca a câmera no NPC mais próximo",
     Default = false,
     Callback = function(state)
+        -- Variáveis principais (agora dentro do Callback para acesso global)
         local Players = game:GetService("Players")
         local player = Players.LocalPlayer
         local runService = game:GetService("RunService")
         local camera = workspace.CurrentCamera
-        
-        if not _G.AimLockLoop then
-            _G.AimLockLoop = nil
+        local toggleLoop
+
+        -- Funções locais
+        local function addPlayerHighlight()
+            if player.Character then
+                local highlight = player.Character:FindFirstChild("PlayerHighlightESP")
+                if not highlight then
+                    highlight = Instance.new("Highlight")
+                    highlight.Name = "PlayerHighlightESP"
+                    highlight.FillColor = Color3.new(1, 0, 0)
+                    highlight.OutlineColor = Color3.new(1, 1, 1)
+                    highlight.FillTransparency = 0.5
+                    highlight.OutlineTransparency = 0
+                    highlight.Parent = player.Character
+                end
+            end
         end
 
-        local function removeHighlight()
+        local function removePlayerHighlight()
             if player.Character and player.Character:FindFirstChild("PlayerHighlightESP") then
                 player.Character.PlayerHighlightESP:Destroy()
             end
         end
 
-        local function startAimLock()
-            if _G.AimLockLoop then
-                _G.AimLockLoop:Disconnect()
-            end
-            
-            _G.AimLockLoop = runService.RenderStepped:Connect(function()
-                if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
-                    return
-                end
-                
-                local closestNPC = nil
-                local closestDistance = math.huge
-                
-                for _, npc in ipairs(workspace:GetDescendants()) do
-                    if npc:IsA("Model") and npc ~= player.Character then
-                        local humanoid = npc:FindFirstChildOfClass("Humanoid")
-                        local hrp = npc:FindFirstChild("HumanoidRootPart")
-                        
-                        if humanoid and hrp and humanoid.Health > 0 then
+        local function getClosestNPC()
+            local closestNPC = nil
+            local closestDistance = math.huge
+            for _, object in ipairs(workspace:GetDescendants()) do
+                if object:IsA("Model") then
+                    local humanoid = object:FindFirstChild("Humanoid") or object:FindFirstChildWhichIsA("Humanoid")
+                    local hrp = object:FindFirstChild("HumanoidRootPart") or object.PrimaryPart
+                    if humanoid and hrp and humanoid.Health > 0 then
+                        local isPlayer = false
+                        for _, pl in ipairs(Players:GetPlayers()) do
+                            if pl.Character == object then
+                                isPlayer = true
+                                break
+                            end
+                        end
+                        if not isPlayer then
                             local distance = (hrp.Position - player.Character.HumanoidRootPart.Position).Magnitude
                             if distance < closestDistance then
                                 closestDistance = distance
-                                closestNPC = npc
+                                closestNPC = object
                             end
                         end
                     end
                 end
-                
-                if closestNPC then
-                    camera.CameraSubject = closestNPC:FindFirstChildOfClass("Humanoid")
-                    if not player.Character:FindFirstChild("PlayerHighlightESP") then
-                        local highlight = Instance.new("Highlight")
-                        highlight.Name = "PlayerHighlightESP"
-                        highlight.FillColor = Color3.new(1, 0, 0)
-                        highlight.OutlineColor = Color3.new(1, 1, 1)
-                        highlight.FillTransparency = 0.5
-                        highlight.OutlineTransparency = 0
-                        highlight.Parent = player.Character
-                    end
-                else
-                    camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
-                    removeHighlight()
-                end
-            end)
+            end
+            return closestNPC
         end
 
+        -- Lógica do Toggle
         if state then
             player.CameraMode = Enum.CameraMode.Classic
-            startAimLock()
+            toggleLoop = runService.RenderStepped:Connect(function()
+                local npc = getClosestNPC()
+                if npc and npc:FindFirstChild("Humanoid") then
+                    local npcHumanoid = npc:FindFirstChild("Humanoid")
+                    if npcHumanoid.Health > 0 then
+                        camera.CameraSubject = npcHumanoid
+                        addPlayerHighlight()
+                    else
+                        removePlayerHighlight()
+                        camera.CameraSubject = player.Character.Humanoid
+                    end
+                else
+                    removePlayerHighlight()
+                    camera.CameraSubject = player.Character.Humanoid
+                end
+            end)
         else
-            if _G.AimLockLoop then
-                _G.AimLockLoop:Disconnect()
-                _G.AimLockLoop = nil
+            -- Desativa completamente
+            if toggleLoop then
+                toggleLoop:Disconnect()
             end
-            removeHighlight()
-            if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
-                camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
+            removePlayerHighlight()
+            if player.Character and player.Character.Humanoid then
+                camera.CameraSubject = player.Character.Humanoid
             end
         end
     end
-})                    
-            
+})
                 
             
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
