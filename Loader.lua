@@ -235,3 +235,5 @@ trainTab:AddButton({
         end)
     end
 })
+
+local andtab = wimdow:addtab{( Title = "end game", Icon = "end" })
