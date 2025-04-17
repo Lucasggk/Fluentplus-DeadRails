@@ -136,7 +136,12 @@ BondsTab:AddToggle({
     Default = false,
     Callback = function(state)
         if state then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Aimlock/main/Loader.lua"))()
+            local success, err = pcall(function()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Aimlock/main/Loader.lua"))()
+            end)
+            if not success then
+                warn("Erro ao carregar o Aimlock: " .. err)
+            end
         end
     end
 })
