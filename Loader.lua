@@ -130,7 +130,7 @@ Tab:AddParagraph({
 
 local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-BondsTab:AddLabel("aimbot em desenvolvimento.\espere ele ser criado para uso.")
+ BondsTab:AddLabel("aimbot em desenvolvimento.\nespere ele ser criado para uso.")
 
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
