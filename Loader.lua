@@ -227,9 +227,6 @@ trainTab:AddButton({
     end
 })
 
-
-repeat task.wait() until game:IsLoaded()
-
 local andtab = window:addtab({
     Title = "end game",
     Icon = "list"
