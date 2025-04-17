@@ -128,102 +128,7 @@ Tab:AddParagraph({
 
 
 
-local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-   BondsTab:AddToggle("AimLockToggle", {
-    Title = "AimLock NPC",
-    Description = "Tranca a câmera no NPC mais próximo",
-    Default = false,
-    Callback = function(state)
-        -- Variáveis principais (agora dentro do Callback para acesso global)
-        local Players = game:GetService("Players")
-        local player = Players.LocalPlayer
-        local runService = game:GetService("RunService")
-        local camera = workspace.CurrentCamera
-        local toggleLoop
-
-        -- Funções locais
-        local function addPlayerHighlight()
-            if player.Character then
-                local highlight = player.Character:FindFirstChild("PlayerHighlightESP")
-                if not highlight then
-                    highlight = Instance.new("Highlight")
-                    highlight.Name = "PlayerHighlightESP"
-                    highlight.FillColor = Color3.new(1, 0, 0)
-                    highlight.OutlineColor = Color3.new(1, 1, 1)
-                    highlight.FillTransparency = 0.5
-                    highlight.OutlineTransparency = 0
-                    highlight.Parent = player.Character
-                end
-            end
-        end
-
-        local function removePlayerHighlight()
-            if player.Character and player.Character:FindFirstChild("PlayerHighlightESP") then
-                player.Character.PlayerHighlightESP:Destroy()
-            end
-        end
-
-        local function getClosestNPC()
-            local closestNPC = nil
-            local closestDistance = math.huge
-            for _, object in ipairs(workspace:GetDescendants()) do
-                if object:IsA("Model") then
-                    local humanoid = object:FindFirstChild("Humanoid") or object:FindFirstChildWhichIsA("Humanoid")
-                    local hrp = object:FindFirstChild("HumanoidRootPart") or object.PrimaryPart
-                    if humanoid and hrp and humanoid.Health > 0 then
-                        local isPlayer = false
-                        for _, pl in ipairs(Players:GetPlayers()) do
-                            if pl.Character == object then
-                                isPlayer = true
-                                break
-                            end
-                        end
-                        if not isPlayer then
-                            local distance = (hrp.Position - player.Character.HumanoidRootPart.Position).Magnitude
-                            if distance < closestDistance then
-                                closestDistance = distance
-                                closestNPC = object
-                            end
-                        end
-                    end
-                end
-            end
-            return closestNPC
-        end
-
-        -- Lógica do Toggle
-        if state then
-            player.CameraMode = Enum.CameraMode.Classic
-            toggleLoop = runService.RenderStepped:Connect(function()
-                local npc = getClosestNPC()
-                if npc and npc:FindFirstChild("Humanoid") then
-                    local npcHumanoid = npc:FindFirstChild("Humanoid")
-                    if npcHumanoid.Health > 0 then
-                        camera.CameraSubject = npcHumanoid
-                        addPlayerHighlight()
-                    else
-                        removePlayerHighlight()
-                        camera.CameraSubject = player.Character.Humanoid
-                    end
-                else
-                    removePlayerHighlight()
-                    camera.CameraSubject = player.Character.Humanoid
-                end
-            end)
-        else
-            -- Desativa completamente
-            if toggleLoop then
-                toggleLoop:Disconnect()
-            end
-            removePlayerHighlight()
-            if player.Character and player.Character.Humanoid then
-                camera.CameraSubject = player.Character.Humanoid
-            end
-        end
-    end
-})
-                
             
 local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
@@ -330,5 +235,98 @@ andtab:AddButton({
     Description = "TP para o final",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
+    end
+})
+
+
+
+
+
+local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
+
+                   tabpt:AddToggle("AimLockToggle", {
+    Title = "AimLock NPC",
+    Description = "Tranca a câmera no NPC mais próximo",
+    Default = false,
+    Callback = function(state)
+        local Players = game:GetService("Players")
+        local player = Players.LocalPlayer
+        local runService = game:GetService("RunService")
+        local camera = workspace.CurrentCamera
+
+        if not _G.AimLockData then
+            _G.AimLockData = {
+                Loop = nil,
+                Highlight = nil
+            }
+        end
+
+        local function removeHighlight()
+            if _G.AimLockData.Highlight then
+                _G.AimLockData.Highlight:Destroy()
+                _G.AimLockData.Highlight = nil
+            end
+        end
+
+        local function stopAimLock()
+            if _G.AimLockData.Loop then
+                _G.AimLockData.Loop:Disconnect()
+                _G.AimLockData.Loop = nil
+            end
+            removeHighlight()
+            if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+                camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
+            end
+        end
+
+        local function startAimLock()
+            stopAimLock()
+            
+            _G.AimLockData.Loop = runService.RenderStepped:Connect(function()
+                if not state then return stopAimLock() end
+                if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
+                
+                local closestNPC = nil
+                local closestDistance = math.huge
+                
+                for _, npc in ipairs(workspace:GetDescendants()) do
+                    if npc:IsA("Model") and npc ~= player.Character then
+                        local humanoid = npc:FindFirstChildOfClass("Humanoid")
+                        local hrp = npc:FindFirstChild("HumanoidRootPart")
+                        
+                        if humanoid and hrp and humanoid.Health > 0 then
+                            local distance = (hrp.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                            if distance < closestDistance then
+                                closestDistance = distance
+                                closestNPC = npc
+                            end
+                        end
+                    end
+                end
+                
+                if closestNPC then
+                    camera.CameraSubject = closestNPC:FindFirstChildOfClass("Humanoid")
+                    if not _G.AimLockData.Highlight then
+                        _G.AimLockData.Highlight = Instance.new("Highlight")
+                        _G.AimLockData.Highlight.Name = "PlayerHighlightESP"
+                        _G.AimLockData.Highlight.FillColor = Color3.new(1, 0, 0)
+                        _G.AimLockData.Highlight.OutlineColor = Color3.new(1, 1, 1)
+                        _G.AimLockData.Highlight.FillTransparency = 0.5
+                        _G.AimLockData.Highlight.OutlineTransparency = 0
+                        _G.AimLockData.Highlight.Parent = player.Character
+                    end
+                else
+                    camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
+                    removeHighlight()
+                end
+            end)
+        end
+
+        if state then
+            player.CameraMode = Enum.CameraMode.Classic
+            startAimLock()
+        else
+            stopAimLock()
+        end
     end
 })
