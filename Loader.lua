@@ -218,9 +218,9 @@ trainTab:AddButton({
 })
 
 trainTab:AddParagraph({
-  Title = "em breve",
-  Content = "em breve terá mais funcionalidades por aqui!"
- })
+      Title = "Em breve",
+      Content = "Em breve terá mais funcionalidades por aqui!"
+   })
 
 
 local andtab = Window:AddTab({
@@ -236,10 +236,10 @@ andtab:AddButton({
     end
 })
 
-trainTab:AddParagraph({
-  Title = "em breve",
-  Content = "em breve terá mais funcionalidades por aqui!"
- })
+andtab:AddParagraph({
+      Title = "Em breve",
+      Content = "Em breve terá mais funcionalidades por aqui!"
+   })
 
 
 
@@ -311,11 +311,10 @@ BondsTab:AddToggle("AimLockToggle", {
     end
 })
 
-trainTab:AddParagraph({
-  Title = "em breve",
-  Content = "em breve terá mais funcionalidades por aqui!"
- })
-
+BondsTab:AddParagraph({
+      Title = "Em breve",
+      Content = "Em breve terá mais funcionalidades por aqui!"
+   })
 
 
 
