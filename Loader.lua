@@ -236,30 +236,6 @@ andtab:AddButton({
     end
 })
 
-local tempoRestante = 600
-local timerTexto = string.format("Tempo restante: %02d:%02d", math.floor(tempoRestante / 60), tempoRestante % 60)
-
-local tempoParagraph = andtab:AddParagraph({
-    Title = "Timer",
-    Content = timerTexto
-})
-
-task.spawn(function()
-    while tempoRestante > 0 do
-        task.wait(1)
-        tempoRestante -= 1
-        local textoAtualizado = string.format("Tempo restante: %02d:%02d", math.floor(tempoRestante / 60), tempoRestante % 60)
-        -- Remove e adiciona novamente o Paragraph pra atualizar
-        andtab.Flags.Paragraphs["Timer"]:Remove()
-        tempoParagraph = andtab:AddParagraph({
-            Title = "Timer",
-            Content = textoAtualizado
-        })
-    end
-end)
-
-
-
 
 andtab:AddParagraph({
       Title = "Em breve",
