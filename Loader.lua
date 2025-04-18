@@ -405,8 +405,8 @@ ringtaa:AddButton({
     Title = "Tp to end",
     Description = "TP para o final",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
-   wait(10)
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
+   if false then wait(10)
    local TweenService = game:GetService("TweenService")
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
@@ -421,7 +421,8 @@ local goal = {Position = targetPosition}
 local tween = TweenService:Create(rootPart, tweenInfo, goal)
 
 tween:Play()
-    end
+   end
+  end 
 })
   
 
