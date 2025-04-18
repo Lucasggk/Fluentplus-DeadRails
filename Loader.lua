@@ -134,7 +134,7 @@ end
 
 
             
-local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
+local tabpt = Window:AddTab({ Title = "Teleports made by Lucas", Icon = "car" })
 
 -- repeat task.wait() until game:IsLoaded()
 
