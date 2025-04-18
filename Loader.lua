@@ -265,7 +265,7 @@ andtab:AddButton({
         local hrp = character:WaitForChild("HumanoidRootPart")
         local targetPos = Vector3.new(-424.4, 28.1, -49040.7)
 
-        
+        -- Teleporte
         task.spawn(function()
             for i = 1, 450 do
                 hrp.CFrame = CFrame.new(targetPos)
@@ -320,7 +320,7 @@ andtab:AddButton({
         player.CameraMode = Enum.CameraMode.Classic
         startAimLock()
 
-        
+        -- Noclip
         local noclip = true
         runService.Stepped:Connect(function()
             if noclip and character then
@@ -335,12 +335,12 @@ andtab:AddButton({
         local TweenService = game:GetService("TweenService")
         local humanoid = character:WaitForChild("Humanoid")
 
-        task.delay(25, function()
+        -- Parar o AimLock após 10.5 segundos
+        task.delay(17, function()
             stopAimLock()
         end)
     end
 })
-
 
 
 
