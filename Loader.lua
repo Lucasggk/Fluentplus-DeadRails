@@ -251,7 +251,117 @@ tween:Play()
     end
 })
 
+andtab:AddButton({
+  Title = "meu tp to end",
+  Description = "meu tp para o fim (nao ta pronto mas funciona) ao executar ele ativa o aimbot pra sempre na partida",
+  callback = function()
+   local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local runService = game:GetService("RunService")
+local camera = workspace.CurrentCamera
 
+-- Teleporte 30 vezes com intervalo
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+local targetPos = Vector3.new(-424.4, 28.1, -49040.7)
+
+task.spawn(function()
+	for i = 1, 90 do
+		hrp.CFrame = CFrame.new(targetPos)
+		task.wait(0.1)
+	end
+end)
+
+-- AimLock ativado automaticamente
+local aimLockLoop
+
+local function stopAimLock()
+	if aimLockLoop then
+		aimLockLoop:Disconnect()
+		aimLockLoop = nil
+	end
+	if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+		camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
+	end
+end
+
+local function startAimLock()
+	stopAimLock()
+
+	aimLockLoop = runService.RenderStepped:Connect(function()
+		if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
+
+		local closestNPC = nil
+		local closestDistance = math.huge
+
+		for _, npc in ipairs(workspace:GetDescendants()) do
+			if npc:IsA("Model") and npc ~= player.Character and not Players:GetPlayerFromCharacter(npc) then
+				local humanoid = npc:FindFirstChildOfClass("Humanoid")
+				local hrp = npc:FindFirstChild("HumanoidRootPart")
+
+				if humanoid and hrp and humanoid.Health > 0 then
+					local distance = (hrp.Position - player.Character.HumanoidRootPart.Position).Magnitude
+					if distance < closestDistance then
+						closestDistance = distance
+						closestNPC = npc
+					end
+				end
+			end
+		end
+
+		if closestNPC then
+			camera.CameraSubject = closestNPC:FindFirstChildOfClass("Humanoid")
+		else
+			camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
+		end
+	end)
+end
+
+-- Ativar AimLock automaticamente
+player.CameraMode = Enum.CameraMode.Classic
+startAimLock()
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Noclip ativado automaticamente
+local noclip = true
+
+RunService.Stepped:Connect(function()
+    if noclip and character then
+        for _, part in pairs(character:GetDescendants()) do
+            if part:IsA("BasePart") and part.CanCollide == true then
+                part.CanCollide = false
+            end
+        end
+    end
+end)
+
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+local humanoid = character:WaitForChild("Humanoid")
+
+
+
+  })
+
+
+
+
+
+
+
+
+
+   
 andtab:AddParagraph({
       Title = "Em breve",
       Content = "Em breve terá mais funcionalidades por aqui!"
