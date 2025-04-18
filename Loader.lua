@@ -217,6 +217,12 @@ trainTab:AddButton({
     end
 })
 
+trainTab:AddParagraph({
+  Title = "em breve",
+  Content = "em breve terá mais funcionalidades por aqui!"
+ })
+
+
 local andtab = Window:AddTab({
     Title = "end game",
     Icon = "list"
@@ -230,7 +236,10 @@ andtab:AddButton({
     end
 })
 
-
+trainTab:AddParagraph({
+  Title = "em breve",
+  Content = "em breve terá mais funcionalidades por aqui!"
+ })
 
 
 
@@ -302,7 +311,10 @@ BondsTab:AddToggle("AimLockToggle", {
     end
 })
 
-
+trainTab:AddParagraph({
+  Title = "em breve",
+  Content = "em breve terá mais funcionalidades por aqui!"
+ })
 
 
 
@@ -327,5 +339,5 @@ local creditos = Window:AddTab({ Title = "Créditos", Icon = "list" })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "Aimbot, train, TP (maioria) feito por Lucas"
+      Content = "Aimbot,Funções do train, TPs (maioria) feito por Lucas"
    })
