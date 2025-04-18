@@ -308,3 +308,26 @@ BondsTab:AddToggle("AimLockToggle", {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+local creditos = window:addtab({ Title = "creditos", Icon = "list" })
+creditos:AddParagraph({
+  Title = "creditos de criação do script:",
+  content = "Tps (fim do jogo, starling) feito por ringtaa"
+ })
+
+creditos:AddParagraph({
+  Title = "creditos de criação do script:",
+  content = "aimbot, train, tp (maioria) feito por Lucas "
+
+  
