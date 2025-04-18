@@ -14,9 +14,6 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true
 })
 
-local testes = teste
-if testes == true then
-
 local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 
 local defaultTpPos = Vector3.new(100, 10, 200)
@@ -126,8 +123,6 @@ Tab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel and bondLabel.Text or "N/A"
 })
- 
-else
  
 -- eterna linha 116 (sempre ficar na linha 127)
 
