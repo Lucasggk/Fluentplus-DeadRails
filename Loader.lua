@@ -14,7 +14,7 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true
 })
 
-if not _G.teste then return 
+if getgenv().teste then
 local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 
 local defaultTpPos = Vector3.new(100, 10, 200)
