@@ -406,22 +406,6 @@ ringtaa:AddButton({
     Description = "TP para o final",
     Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
-   if false then wait(10)
-   local TweenService = game:GetService("TweenService")
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local rootPart = character:WaitForChild("HumanoidRootPart")
-
-local targetPosition = Vector3.new(-426.8, 3.0, -49044.3)
-local distance = (rootPart.Position - targetPosition).Magnitude
-local time = distance / 13
-
-local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear)
-local goal = {Position = targetPosition}
-local tween = TweenService:Create(rootPart, tweenInfo, goal)
-
-tween:Play()
-   end
   end 
 })
   
