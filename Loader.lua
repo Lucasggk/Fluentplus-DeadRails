@@ -336,7 +336,7 @@ andtab:AddButton({
         local humanoid = character:WaitForChild("Humanoid")
 
         -- Parar o AimLock após 10.5 segundos
-        task.delay(17, function()
+        task.delay(25, function()
             stopAimLock()
         end)
     end
