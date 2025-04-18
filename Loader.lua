@@ -329,5 +329,5 @@ creditos:AddParagraph({
 creditos:AddParagraph({
   Title = "creditos de criação do script:",
   content = "aimbot, train, tp (maioria) feito por Lucas "
-
+ })
   
