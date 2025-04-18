@@ -236,6 +236,28 @@ andtab:AddButton({
     end
 })
 
+local function formatTime(seconds)
+   local min = math.floor(seconds / 60)
+   local sec = seconds % 60
+   return string.format("%02d:%02d", min, sec)
+end
+
+local timerParagraph = andtab:AddParagraph({
+   Title = "Tempo para poder puxar a alavanca:",
+   Content = "10:00"
+})
+
+local remaining = 600 -- 10 minutos
+
+task.spawn(function()
+   while remaining >= 0 do
+      timerParagraph:SetContent(formatTime(remaining))
+      task.wait(1)
+      remaining -= 1
+   end
+end)
+
+
 andtab:AddParagraph({
       Title = "Em breve",
       Content = "Em breve terá mais funcionalidades por aqui!"
