@@ -14,6 +14,7 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true
 })
 
+if not _G.teste then return 
 local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 
 local defaultTpPos = Vector3.new(100, 10, 200)
@@ -125,7 +126,7 @@ Tab:AddParagraph({
 })
  
 -- eterna linha 116 (sempre ficar na linha 127)
-
+end
 
 
 
