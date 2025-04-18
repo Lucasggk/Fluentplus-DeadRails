@@ -15,7 +15,7 @@ local Window = Fluent:CreateWindow({
 })
 
 local testes = teste
-if testes then
+if testes == true then
 
 local Tab = Window:AddTab({ Title = "testes", Icon = "home" })
 
@@ -126,7 +126,9 @@ Tab:AddParagraph({
     Title = "Seu Bond:",
     Content = bondLabel and bondLabel.Text or "N/A"
 })
-end
+ 
+else
+ 
 -- eterna linha 116 (sempre ficar na linha 127)
 
 
@@ -300,3 +302,9 @@ BondsTab:AddToggle("AimLockToggle", {
         end
     end
 })
+
+
+
+
+
+end
