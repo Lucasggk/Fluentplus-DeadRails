@@ -165,21 +165,6 @@ tabpt:AddButton({
 })
 
 
-tabpt:AddButton({
-    Title = "Tp starling",
-    Description = " TP para starling",
-    Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/sterlingnotifcation.github.io/refs/heads/main/Sterling.lua'))()
-    end
-})
-
-tabpt:AddButton({
-    Title = "Tp Bank",
-    Description = " TP para o banco mais próximo",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tptobank.github.io/refs/heads/main/Banktp.lua"))()
-    end
-})
 
 
  
@@ -228,28 +213,7 @@ local andtab = Window:AddTab({
     Icon = "list"
 })
 
-andtab:AddButton({
-    Title = "Tp to end",
-    Description = "TP para o final",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
-   wait(7)
-   local TweenService = game:GetService("TweenService")
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local rootPart = character:WaitForChild("HumanoidRootPart")
 
-local targetPosition = Vector3.new(-426.8, 3.0, -49044.3)
-local distance = (rootPart.Position - targetPosition).Magnitude
-local time = distance / 13
-
-local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear)
-local goal = {Position = targetPosition}
-local tween = TweenService:Create(rootPart, tweenInfo, goal)
-
-tween:Play()
-    end
-})
 
 
 andtab:AddButton({
@@ -265,7 +229,6 @@ andtab:AddButton({
         local hrp = character:WaitForChild("HumanoidRootPart")
         local targetPos = Vector3.new(-424.4, 28.1, -49040.7)
 
-        -- Teleporte
         task.spawn(function()
             for i = 1, 450 do
                 hrp.CFrame = CFrame.new(targetPos)
@@ -320,7 +283,7 @@ andtab:AddButton({
         player.CameraMode = Enum.CameraMode.Classic
         startAimLock()
 
-        -- Noclip
+        
         local noclip = true
         runService.Stepped:Connect(function()
             if noclip and character then
@@ -335,7 +298,7 @@ andtab:AddButton({
         local TweenService = game:GetService("TweenService")
         local humanoid = character:WaitForChild("Humanoid")
 
-        -- Parar o AimLock após 10.5 segundos
+        
         task.delay(25, function()
             stopAimLock()
         end)
@@ -432,11 +395,53 @@ BondsTab:AddParagraph({
    })
 
 
+local ringtaa = Window:AddTab({ Title = "teleport made by ringtaa", Icon = "List"})
+
+ringtaa:AddParagraph({
+  Title = "Como usar:"
+  Content = "tem chances de nao funcionar pois nao fui eu que fiz, para 100% de chance use o meu tp to end entre outros!"
+
+ringtaa:AddButton({
+    Title = "Tp to end",
+    Description = "TP para o final",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
+   wait(10)
+   local TweenService = game:GetService("TweenService")
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local rootPart = character:WaitForChild("HumanoidRootPart")
+
+local targetPosition = Vector3.new(-426.8, 3.0, -49044.3)
+local distance = (rootPart.Position - targetPosition).Magnitude
+local time = distance / 13
+
+local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear)
+local goal = {Position = targetPosition}
+local tween = TweenService:Create(rootPart, tweenInfo, goal)
+
+tween:Play()
+    end
+})
+  
 
 
 
+ringtaa:AddButton({
+    Title = "Tp starling",
+    Description = " TP para starling",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/sterlingnotifcation.github.io/refs/heads/main/Sterling.lua'))()
+    end
+})
 
-
+ringtaa:AddButton({
+    Title = "Tp Bank",
+    Description = " TP para o banco mais próximo",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tptobank.github.io/refs/heads/main/Banktp.lua"))()
+    end
+})
 
 
 
@@ -448,10 +453,10 @@ local creditos = Window:AddTab({ Title = "Créditos", Icon = "list" })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "TPs (fim do jogo, Starling) feito por ringtaa"
+      Content = "TPs (fim do jogo (pacifista, Starling, banco) feito por ringtaa"
    })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "Aimbot,Funções do train, TPs (maioria) feito por Lucas"
+      Content = "Aimbot,Funções do train, TPs (maioria), tp para fim do jogo (nao pacifista) feito por Lucas"
    })
