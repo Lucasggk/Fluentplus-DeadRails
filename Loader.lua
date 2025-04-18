@@ -79,13 +79,11 @@ if getgenv().teste then
             if not char or not char:FindFirstChild("HumanoidRootPart") then return end
             hrp = char:FindFirstChild("HumanoidRootPart")
             humanoid = char:FindFirstChildWhichIsA("Humanoid")
-
             if flying then  
                 bv = Instance.new("BodyVelocity")  
                 bv.Velocity = Vector3.zero  
                 bv.MaxForce = Vector3.new(1e9, 1e9, 1e9)  
                 bv.Parent = hrp  
-
                 bg = Instance.new("BodyGyro")  
                 bg.MaxTorque = Vector3.new(1e9, 1e9, 1e9)  
                 bg.CFrame = hrp.CFrame  
