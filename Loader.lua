@@ -210,7 +210,7 @@ main:AddToggle("ActivateBondToggle", {
                         local args = { bond }
                         game:GetService("ReplicatedStorage").Packages.RemotePromise.Remotes.C_ActivateObject:FireServer(unpack(args))
                     end
-                    task.wait(0.25)
+                    task.wait(0.5)
                 end
             end)
         end
