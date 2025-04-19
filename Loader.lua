@@ -161,7 +161,9 @@ main:AddToggle("AutoCollectToggle", {
                     workspace.RuntimeItems:FindFirstChild("RevolverAmmo"),
                     workspace.RuntimeItems:FindFirstChild("Snake Oil"),
                     workspace.RuntimeItems:FindFirstChild("Shovel"),
-                    workspace.RuntimeItems:FindFirstChild("OpenableCrate")
+                    workspace.RuntimeItems:FindFirstChild("OpenableCrate"),
+                    workspace.RuntimeItems:FindFirstChild("Navy Revolver"),
+                    workspace.RuntimeItems:FindFirstChild("Bolt Action Rifle")
                 }
 
                 local rs = game:GetService("ReplicatedStorage")
@@ -188,7 +190,6 @@ main:AddToggle("AutoCollectToggle", {
         end
     end
 })
-
 
 
 
