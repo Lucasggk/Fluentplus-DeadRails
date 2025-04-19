@@ -133,9 +133,11 @@ local main = Window:AddTab({
   Icon = "home"
  })
 
+local Section = Add:Section("auto collect/use")
+
 main:AddToggle("AutoCollectToggle", {
     Title = "Auto Collect",
-    Description = "Coleta automaticamente os itens do chão",
+    Description = "Coleta automaticamente os itens do chão (em desenvolvimento)",
     Default = false,
     Callback = function(state)
         if state then
