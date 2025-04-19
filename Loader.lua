@@ -163,7 +163,7 @@ main:AddToggle("AutoCollectToggle", {
                     workspace.RuntimeItems:FindFirstChild("Shovel"),
                     workspace.RuntimeItems:FindFirstChild("OpenableCrate"),
                     workspace.RuntimeItems:FindFirstChild("Navy Revolver"),
-                    workspace.RuntimeItems:FindFirstChild("Bolt Action Rifle")
+                    workspace.RuntimeItems:FindFirstChild("Bolt Action Rifle")  
                 }
 
                 local rs = game:GetService("ReplicatedStorage")
@@ -183,7 +183,7 @@ main:AddToggle("AutoCollectToggle", {
 
             task.spawn(function()
                 while autoCollectRunning do
-                    task.wait(0.05)
+                    task.wait(0.2)
                     pcall(collectItems)
                 end
             end)
