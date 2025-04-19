@@ -384,7 +384,13 @@ tabpt:AddButton({
     end
 })
 
-
+tabpt:AddButton({
+    Title = "teleports UFO",
+    Description = "Abre outra ui, script para o UFO",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/DeadRails"))()
+    end
+})
 
 
  
