@@ -149,22 +149,26 @@ main:AddToggle("AutoCollectToggle", {
         if state then
             local function collectItems()
                 if not workspace:FindFirstChild("RuntimeItems") then return end
+                local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                if not hrp then return end
 
                 local items = {
-                    workspace.RuntimeItems:FindFirstChild("Rifle"),
-                    workspace.RuntimeItems:FindFirstChild("RifleAmmo"),
-                    workspace.RuntimeItems:FindFirstChild("Bandage"),
-                    workspace.RuntimeItems:FindFirstChild("Shotgun"),
-                    workspace.RuntimeItems:FindFirstChild("Revolver"),
-                    workspace.RuntimeItems:FindFirstChild("ShotgunShells"),
-                    workspace.RuntimeItems:FindFirstChild("Molotov"),
-                    workspace.RuntimeItems:FindFirstChild("RevolverAmmo"),
-                    workspace.RuntimeItems:FindFirstChild("Mauser")
-                    workspace.RuntimeItems:FindFirstChild("Snake Oil"),
-                    workspace.RuntimeItems:FindFirstChild("Shovel"),
-                    workspace.RuntimeItems:FindFirstChild("OpenableCrate"),
-                    workspace.RuntimeItems:FindFirstChild("Navy Revolver"),
-                    workspace.RuntimeItems:FindFirstChild("Bolt Action Rifle")  
+                    "Rifle",
+                    "RifleAmmo",
+                    "Bandage",
+                    "Shotgun",
+                    "Revolver",
+                    "ShotgunShells",
+                    "Molotov",
+                    "RevolverAmmo",
+                    "Mauser",
+                    "Snake Oil",
+                    "Shovel",
+                    "OpenableCrate",
+                    "Navy Revolver",
+                    "Bolt Action Rifle",
+                    "Holy Water",
+                    "Electrocutioner"
                 }
 
                 local rs = game:GetService("ReplicatedStorage")
@@ -173,8 +177,9 @@ main:AddToggle("AutoCollectToggle", {
 
                 if not pickUpRemote or not activateRemote then return end
 
-                for _, item in pairs(items) do
-                    if item then
+                for _, itemName in pairs(items) do
+                    local item = workspace.RuntimeItems:FindFirstChild(itemName)
+                    if item and item:IsA("BasePart") and (item.Position - hrp.Position).Magnitude <= 50 then
                         local args = { item }
                         pickUpRemote:FireServer(unpack(args))
                         activateRemote:FireServer(unpack(args))
