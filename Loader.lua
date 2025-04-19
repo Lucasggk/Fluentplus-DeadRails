@@ -560,5 +560,5 @@ local creditos = Window:AddTab({ Title = "Créditos", Icon = "list" })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "Aimbot,Funções do train, TPs (maioria), tp para fim do jogo (nao pacifista) e auto collect feito por Lucas"
+      Content = "Aimbot,Funções do train, TPs (maioria), tp para fim do jogo (nao pacifista) e funções de collect feito por Lucas"
    })
