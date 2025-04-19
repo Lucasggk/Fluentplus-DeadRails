@@ -433,9 +433,9 @@ local nose = ringtaa:AddSection("seção da Páscoa")
 
 ringtaa:AddButton({
     Title = "Tp para os 6 golden eggs ",
-    Description = "100% work",
+    Description = "funciona 100% | Recomendo usar um snake oil para recuperar hp.",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/deadrailsui.github.io/refs/heads/main/RINGTA.LUA"))()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/r4mpage4/LuaCom/refs/heads/main/collect6eggs.fr'))()
     end
 })
 
