@@ -142,11 +142,88 @@ end
 
 
 
+local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
+
+BondsTab:AddToggle("AimLockToggle", {
+    Title = "AimLock NPC",
+    Description = "Tranca a câmera no NPC mais próximo",
+    Default = false,
+    Callback = function(state)
+        local Players = game:GetService("Players")
+        local player = Players.LocalPlayer
+        local runService = game:GetService("RunService")
+        local camera = workspace.CurrentCamera
+
+        if not _G.AimLockData then
+            _G.AimLockData = { Loop = nil }
+        end
+
+        local function stopAimLock()
+            if _G.AimLockData.Loop then
+                _G.AimLockData.Loop:Disconnect()
+                _G.AimLockData.Loop = nil
+            end
+            if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+                camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
+            end
+        end
+
+        local function startAimLock()
+            stopAimLock()
+            
+            _G.AimLockData.Loop = runService.RenderStepped:Connect(function()
+                if not state then return stopAimLock() end
+                if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
+                
+                local closestNPC = nil
+                local closestDistance = math.huge
+                
+                for _, npc in ipairs(workspace:GetDescendants()) do
+                    if npc:IsA("Model") and npc ~= player.Character then
+                        local humanoid = npc:FindFirstChildOfClass("Humanoid")
+                        local hrp = npc:FindFirstChild("HumanoidRootPart")
+                        
+                        if humanoid and hrp and humanoid.Health > 0 then
+                            local distance = (hrp.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                            if distance < closestDistance then
+                                closestDistance = distance
+                                closestNPC = npc
+                            end
+                        end
+                    end
+                end
+                
+                if closestNPC then
+                    camera.CameraSubject = closestNPC:FindFirstChildOfClass("Humanoid")
+                else
+                    camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
+                end
+            end)
+        end
+
+        if state then
+            player.CameraMode = Enum.CameraMode.Classic
+            startAimLock()
+        else
+            stopAimLock()
+        end
+    end
+})
+
+
+
+
+
+
+
+
+
+
 
 
 
             
-local tabpt = Window:AddTab({ Title = "Teleports made by (Ringtaa e Lucas)", Icon = "car" })
+local tabpt = Window:AddTab({ Title = "Teleports", Icon = "car" })
 
 -- repeat task.wait() until game:IsLoaded()
 
@@ -355,7 +432,6 @@ andtab:AddButton({
         local TweenService = game:GetService("TweenService")
         local humanoid = character:WaitForChild("Humanoid")
 
-        
         task.delay(25, function()
             stopAimLock()
         end)
@@ -378,73 +454,7 @@ andtab:AddParagraph({
 
 
 
-local BondsTab = Window:AddTab({ Title = "aimbot", Icon = "list" })
 
-BondsTab:AddToggle("AimLockToggle", {
-    Title = "AimLock NPC",
-    Description = "Tranca a câmera no NPC mais próximo",
-    Default = false,
-    Callback = function(state)
-        local Players = game:GetService("Players")
-        local player = Players.LocalPlayer
-        local runService = game:GetService("RunService")
-        local camera = workspace.CurrentCamera
-
-        if not _G.AimLockData then
-            _G.AimLockData = { Loop = nil }
-        end
-
-        local function stopAimLock()
-            if _G.AimLockData.Loop then
-                _G.AimLockData.Loop:Disconnect()
-                _G.AimLockData.Loop = nil
-            end
-            if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
-                camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
-            end
-        end
-
-        local function startAimLock()
-            stopAimLock()
-            
-            _G.AimLockData.Loop = runService.RenderStepped:Connect(function()
-                if not state then return stopAimLock() end
-                if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
-                
-                local closestNPC = nil
-                local closestDistance = math.huge
-                
-                for _, npc in ipairs(workspace:GetDescendants()) do
-                    if npc:IsA("Model") and npc ~= player.Character then
-                        local humanoid = npc:FindFirstChildOfClass("Humanoid")
-                        local hrp = npc:FindFirstChild("HumanoidRootPart")
-                        
-                        if humanoid and hrp and humanoid.Health > 0 then
-                            local distance = (hrp.Position - player.Character.HumanoidRootPart.Position).Magnitude
-                            if distance < closestDistance then
-                                closestDistance = distance
-                                closestNPC = npc
-                            end
-                        end
-                    end
-                end
-                
-                if closestNPC then
-                    camera.CameraSubject = closestNPC:FindFirstChildOfClass("Humanoid")
-                else
-                    camera.CameraSubject = player.Character:FindFirstChildOfClass("Humanoid")
-                end
-            end)
-        end
-
-        if state then
-            player.CameraMode = Enum.CameraMode.Classic
-            startAimLock()
-        else
-            stopAimLock()
-        end
-    end
-})
 
 BondsTab:AddParagraph({
       Title = "Em breve",
