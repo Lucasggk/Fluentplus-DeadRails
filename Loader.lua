@@ -128,6 +128,57 @@ if getgenv().teste then
 end
 
             
+local main = Window:AddTab({
+  Title = "main",
+  Icon = "home"
+ })
+
+main:AddToggle("AutoCollectToggle", {
+    Title = "Auto Collect",
+    Description = "Coleta automaticamente os itens do chão",
+    Default = false,
+    Callback = function(state)
+        if state then
+            local function collectItems()
+                if not workspace:FindFirstChild("RuntimeItems") then return end
+
+                local items = {
+                    workspace.RuntimeItems:FindFirstChild("Rifle"),
+                    workspace.RuntimeItems:FindFirstChild("RifleAmmo"),
+                    workspace.RuntimeItems:FindFirstChild("Bandage"),
+                    workspace.RuntimeItems:FindFirstChild("Shotgun"),
+                    workspace.RuntimeItems:FindFirstChild("Revolver"),
+                    workspace.RuntimeItems:FindFirstChild("ShotgunShells"),
+                    workspace.RuntimeItems:FindFirstChild("Molotov"),
+                    workspace.RuntimeItems:FindFirstChild("RevolverAmmo"),
+                    workspace.RuntimeItems:FindFirstChild("Snake Oil")
+                }
+
+                local rs = game:GetService("ReplicatedStorage")
+                local pickUpRemote = rs:FindFirstChild("Remotes") and rs.Remotes:FindFirstChild("Tool") and rs.Remotes.Tool:FindFirstChild("PickUpTool")
+                local activateRemote = rs:FindFirstChild("Packages") and rs.Packages:FindFirstChild("RemotePromise") and rs.Packages.RemotePromise.Remotes:FindFirstChild("C_ActivateObject")
+
+                if not pickUpRemote or not activateRemote then return end
+
+                for _, item in pairs(items) do
+                    if item then
+                        local args = { item }
+                        pickUpRemote:FireServer(unpack(args))
+                        activateRemote:FireServer(unpack(args))
+                    end
+                end
+            end
+
+            spawn(function()
+                while true do
+                    wait(1)
+                    pcall(collectItems)
+                end
+            end)
+        end
+    end
+})
+
 
 
 
