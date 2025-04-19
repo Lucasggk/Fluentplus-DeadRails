@@ -430,19 +430,25 @@ ringtaa:AddButton({
 })
 
 
+local nose = ringtaa:AddSection("seção da Páscoa")
 
-
-
+ringtaa:AddButton({
+    Title = "Tp para os 6 golden eggs ",
+    Description = "100% work",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/deadrailsui.github.io/refs/heads/main/RINGTA.LUA"))()
+    end
+})
 
 
 local creditos = Window:AddTab({ Title = "Créditos", Icon = "list" })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "TPs (fim do jogo (pacifista, Starling, banco) feito por ringtaa"
+      Content = "TPs made by ringtaa: feito por ringtaa"
    })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "Aimbot,Funções do train, TPs (maioria), tp para fim do jogo (nao pacifista) feito por Lucas"
+      Content = "Aimbot,Funções do train, TPs (maioria), tp para fim do jogo (nao pacifista) e auto collect feito por Lucas"
    })
