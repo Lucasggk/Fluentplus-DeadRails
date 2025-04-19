@@ -159,6 +159,7 @@ main:AddToggle("AutoCollectToggle", {
                     workspace.RuntimeItems:FindFirstChild("ShotgunShells"),
                     workspace.RuntimeItems:FindFirstChild("Molotov"),
                     workspace.RuntimeItems:FindFirstChild("RevolverAmmo"),
+                    workspace.RuntimeItems:FindFirstChild("Mauser")
                     workspace.RuntimeItems:FindFirstChild("Snake Oil"),
                     workspace.RuntimeItems:FindFirstChild("Shovel"),
                     workspace.RuntimeItems:FindFirstChild("OpenableCrate"),
