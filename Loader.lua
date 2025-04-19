@@ -138,7 +138,7 @@ local tabpt = Window:AddTab({ Title = "Teleports made by Lucas", Icon = "car" })
 
 -- repeat task.wait() until game:IsLoaded()
 
-
+local Section = tabpt:AddSection("Teleports: feito por Lucas: ")
 
 tabpt:AddButton({
     Title = "Tp Tesla",
@@ -165,9 +165,54 @@ tabpt:AddButton({
 })
 
 
+local section = tabpt:AddSection("Teleports feito por ringtaa: ")
 
 
- 
+tabpt:AddParagraph({
+  Title = "Como usar:",
+  Content = "tem chances de nao funcionar pois nao fui eu que fiz, para 100% de chance use o meu tp to end entre outros!"
+ })
+tabpt:AddButton({
+    Title = "Tp to end",
+    Description = "TP para o final",
+    Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
+  end 
+})
+  
+
+
+
+tabpt:AddButton({
+    Title = "Tp starling",
+    Description = " TP para starling",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/sterlingnotifcation.github.io/refs/heads/main/Sterling.lua'))()
+    end
+})
+
+tabpt:AddButton({
+    Title = "Tp Bank",
+    Description = " TP para o banco mais próximo",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tptobank.github.io/refs/heads/main/Banktp.lua"))()
+    end
+})
+
+
+local section = tabpt:AddSection("seção da Páscoa feito por ringtaa")
+
+tabpt:AddButton({
+    Title = "Tp para os 6 golden eggs",
+    Description = "funciona 100% | Recomendo usar um snake oil para recuperar hp.",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/r4mpage4/LuaCom/refs/heads/main/collect6eggs.fr'))()
+    end
+})
+
+
+
+
  
 local trainTab = Window:AddTab({ Title = "Train", Icon = "train" })
 
@@ -395,56 +440,16 @@ BondsTab:AddParagraph({
    })
 
 
-local ringtaa = Window:AddTab({ Title = "teleport made by ringtaa", Icon = "list"})
-
-ringtaa:AddParagraph({
-  Title = "Como usar:",
-  Content = "tem chances de nao funcionar pois nao fui eu que fiz, para 100% de chance use o meu tp to end entre outros!"
- })
-ringtaa:AddButton({
-    Title = "Tp to end",
-    Description = "TP para o final",
-    Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
-  end 
-})
-  
 
 
 
-ringtaa:AddButton({
-    Title = "Tp starling",
-    Description = " TP para starling",
-    Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/ringtaa/sterlingnotifcation.github.io/refs/heads/main/Sterling.lua'))()
-    end
-})
-
-ringtaa:AddButton({
-    Title = "Tp Bank",
-    Description = " TP para o banco mais próximo",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/Tptobank.github.io/refs/heads/main/Banktp.lua"))()
-    end
-})
-
-
-local nose = ringtaa:AddSection("seção da Páscoa")
-
-ringtaa:AddButton({
-    Title = "Tp para os 6 golden eggs ",
-    Description = "funciona 100% | Recomendo usar um snake oil para recuperar hp.",
-    Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/r4mpage4/LuaCom/refs/heads/main/collect6eggs.fr'))()
-    end
-})
 
 
 local creditos = Window:AddTab({ Title = "Créditos", Icon = "list" })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "TPs made by ringtaa: feito por ringtaa"
+      Content = "TPs feito por ringtaa e tp de Páscoa: feito por ringtaa"
    })
 
    creditos:AddParagraph({
