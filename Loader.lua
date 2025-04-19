@@ -396,7 +396,7 @@ tabpt:AddButton({
 
 
 
-local visual = Window:AddTab{( Title = "Visual", Icon = "list"  })
+local visual = Window:AddTab({ Title = "Visual", Icon = "list"  })
 
 
 
