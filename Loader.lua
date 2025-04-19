@@ -184,7 +184,7 @@ main:AddToggle("AutoCollectToggle", {
 
             task.spawn(function()
                 while autoCollectRunning do
-                    task.wait(0.2)
+                    task.wait(0.4)
                     pcall(collectItems)
                 end
             end)
