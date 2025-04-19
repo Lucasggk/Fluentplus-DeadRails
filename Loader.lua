@@ -137,8 +137,6 @@ local Section = main:AddSection("auto collect/use")
 
 
 
-local autoCollectRunning = false
-
 main:AddToggle("AutoCollectToggle", {
     Title = "Auto Collect",
     Description = "Coleta automaticamente os itens do chão (em desenvolvimento)",
@@ -148,9 +146,10 @@ main:AddToggle("AutoCollectToggle", {
 
         if state then
             local function collectItems()
-                if not workspace:FindFirstChild("RuntimeItems") then return end
-                local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                local player = game.Players.LocalPlayer
+                local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
                 if not hrp then return end
+                if not workspace:FindFirstChild("RuntimeItems") then return end
 
                 local items = {
                     "Rifle",
@@ -179,10 +178,19 @@ main:AddToggle("AutoCollectToggle", {
 
                 for _, itemName in pairs(items) do
                     local item = workspace.RuntimeItems:FindFirstChild(itemName)
-                    if item and item:IsA("BasePart") and (item.Position - hrp.Position).Magnitude <= 50 then
-                        local args = { item }
-                        pickUpRemote:FireServer(unpack(args))
-                        activateRemote:FireServer(unpack(args))
+                    if item and item:IsA("Model") then
+                        local primary = item.PrimaryPart or item:FindFirstChildWhichIsA("BasePart")
+                        if primary and (primary.Position - hrp.Position).Magnitude <= 50 then
+                            local args = { item }
+                            pickUpRemote:FireServer(unpack(args))
+                            activateRemote:FireServer(unpack(args))
+                        end
+                    elseif item and item:IsA("BasePart") then
+                        if (item.Position - hrp.Position).Magnitude <= 50 then
+                            local args = { item }
+                            pickUpRemote:FireServer(unpack(args))
+                            activateRemote:FireServer(unpack(args))
+                        end
                     end
                 end
             end
