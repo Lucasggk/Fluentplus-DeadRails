@@ -133,7 +133,7 @@ local main = Window:AddTab({
   Icon = "home"
  })
 
-local Section = Add:Section("auto collect/use")
+local Section = main:AddSection("auto collect/use")
 
 main:AddToggle("AutoCollectToggle", {
     Title = "Auto Collect",
