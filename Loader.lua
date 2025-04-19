@@ -171,7 +171,7 @@ main:AddToggle("AutoCollectToggle", {
 
             spawn(function()
                 while true do
-                    wait(1)
+                    wait(0.05)
                     pcall(collectItems)
                 end
             end)
