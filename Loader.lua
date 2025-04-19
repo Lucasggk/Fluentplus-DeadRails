@@ -174,7 +174,7 @@ tabpt:AddParagraph({
  })
 tabpt:AddButton({
     Title = "Tp to end",
-    Description = "TP para o final",
+    Description = "TP para o final feito por ringtaa (pacifista)",
     Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/newpacifisct/refs/heads/main/newpacifisct.lua"))()
   end 
@@ -263,7 +263,7 @@ local andtab = Window:AddTab({
 
 andtab:AddButton({
     Title = "my tp to end",
-    Description = "Meu tp para o fim, em desenvolvimento mas funciona",
+    Description = "Teleport para o fim (não pacifista) feito por Lucas",
     Callback = function()
         local Players = game:GetService("Players")
         local player = Players.LocalPlayer
