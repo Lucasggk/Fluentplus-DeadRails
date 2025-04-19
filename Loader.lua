@@ -399,8 +399,7 @@ local ringtaa = Window:AddTab({ Title = "teleport made by ringtaa", Icon = "list
 
 ringtaa:AddParagraph({
   Title = "Como usar:",
-  Content = "tem chances de nao funcionar pois nao fui eu que fiz, para 100% de chance use o meu tp to end entre 
-  outros!"
+  Content = "tem chances de nao funcionar pois nao fui eu que fiz, para 100% de chance use o meu tp to end entre outros!"
  })
 ringtaa:AddButton({
     Title = "Tp to end",
