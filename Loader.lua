@@ -135,29 +135,35 @@ local main = Window:AddTab({
 
 local Section = main:AddSection("auto collect/use")
 
+
+
+local autoCollectRunning = false
+
 main:AddToggle("AutoCollectToggle", {
     Title = "Auto Collect",
     Description = "Coleta automaticamente os itens do chão (em desenvolvimento)",
     Default = false,
     Callback = function(state)
+        autoCollectRunning = state
+
         if state then
             local function collectItems()
                 if not workspace:FindFirstChild("RuntimeItems") then return end
 
                 local items = {
-    workspace.RuntimeItems:FindFirstChild("Rifle"),
-    workspace.RuntimeItems:FindFirstChild("RifleAmmo"),
-    workspace.RuntimeItems:FindFirstChild("Bandage"),
-    workspace.RuntimeItems:FindFirstChild("Shotgun"),
-    workspace.RuntimeItems:FindFirstChild("Revolver"),
-    workspace.RuntimeItems:FindFirstChild("ShotgunShells"),
-    workspace.RuntimeItems:FindFirstChild("Molotov"),
-    workspace.RuntimeItems:FindFirstChild("RevolverAmmo"),
-    workspace.RuntimeItems:FindFirstChild("Snake Oil"),
-    workspace.RuntimeItems:FindFirstChild("Shovel"),
-    workspace.RuntimeItems:FindFirstChild("OpenableCrate")
-     }
-     
+                    workspace.RuntimeItems:FindFirstChild("Rifle"),
+                    workspace.RuntimeItems:FindFirstChild("RifleAmmo"),
+                    workspace.RuntimeItems:FindFirstChild("Bandage"),
+                    workspace.RuntimeItems:FindFirstChild("Shotgun"),
+                    workspace.RuntimeItems:FindFirstChild("Revolver"),
+                    workspace.RuntimeItems:FindFirstChild("ShotgunShells"),
+                    workspace.RuntimeItems:FindFirstChild("Molotov"),
+                    workspace.RuntimeItems:FindFirstChild("RevolverAmmo"),
+                    workspace.RuntimeItems:FindFirstChild("Snake Oil"),
+                    workspace.RuntimeItems:FindFirstChild("Shovel"),
+                    workspace.RuntimeItems:FindFirstChild("OpenableCrate")
+                }
+
                 local rs = game:GetService("ReplicatedStorage")
                 local pickUpRemote = rs:FindFirstChild("Remotes") and rs.Remotes:FindFirstChild("Tool") and rs.Remotes.Tool:FindFirstChild("PickUpTool")
                 local activateRemote = rs:FindFirstChild("Packages") and rs.Packages:FindFirstChild("RemotePromise") and rs.Packages.RemotePromise.Remotes:FindFirstChild("C_ActivateObject")
@@ -173,17 +179,15 @@ main:AddToggle("AutoCollectToggle", {
                 end
             end
 
-            spawn(function()
-                while true do
-                    wait(0.05)
+            task.spawn(function()
+                while autoCollectRunning do
+                    task.wait(0.05)
                     pcall(collectItems)
                 end
             end)
         end
     end
 })
-
-
 
 
 
