@@ -193,6 +193,31 @@ main:AddToggle("AutoCollectToggle", {
 
 
 
+local bondRunning = false
+
+main:AddToggle("ActivateBondToggle", {
+    Title = "Collect bonds (perto de você)",
+    Description = "Coleta automaticamente bonds perto de você",
+    Default = false,
+    Callback = function(state)
+        bondRunning = state
+
+        if state then
+            task.spawn(function()
+                while bondRunning do
+                    local bond = workspace.RuntimeItems:FindFirstChild("Bond")
+                    if bond then
+                        local args = { bond }
+                        local remote = game:GetService("ReplicatedStorage").Packages.RemotePromise.Remotes.C_ActivateObject
+                        remote:FireServer(unpack(args))
+                    end
+                    task.wait(0.02) -- tempo entre ativações, pode ajustar
+                end
+            end)
+        end
+    end
+})
+
 
 
 
