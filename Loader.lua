@@ -628,10 +628,10 @@ local creditos = Window:AddTab({ Title = "Créditos", Icon = "list" })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "TPs feito por ringtaa e tp de Páscoa: feito por ringtaa"
+      Content = "TPs (apenas da seção chamada ringtaa) tps de Páscoa e flying : feito por ringtaa"
    })
 
    creditos:AddParagraph({
       Title = "Créditos de criação do script:",
-      Content = "Aimbot,Funções do train, TPs (maioria), tp para fim do jogo (nao pacifista) e funções de collect feito por Lucas"
+      Content = "Todas funções de (aimbot, end game, teleport (não todas, mas minha seção sim) visual, main (menos fly)e train) feito por Lucas"
    })
