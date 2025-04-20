@@ -637,6 +637,6 @@ creditos:AddParagraph({
 })
 
 Creditos:AddParagraph({
-  Title = "­­­­­­­",
+  Title = "­­­­­­­.",
   Content = "(exceto a função de voo) e train foram desenvolvidas por Lucas."
  })
