@@ -627,11 +627,11 @@ BondsTab:AddParagraph({
 local creditos = Window:AddTab({ Title = "Créditos", Icon = "list" })
 
    creditos:AddParagraph({
-    Title = "Créditos de Criação do Script:",
-    Content = "TPs da seção 'ringtaa', TPs de Páscoa e função de voo foram feitos por ringtaa."
+    Title = "Feito por ringtaa:",
+    Content = "- TPs da seção 'ringtaa'\n- TPs de Páscoa\n- Função de voo"
 })
 
 creditos:AddParagraph({
-    Title = "Créditos de Criação do Script:",
-    Content = "As funções de aimbot, end game, teleport (da minha seção), visão, sistema principal (exceto o voo) e train foram desenvolvidas por Lucas."
+    Title = "Feito por Lucas:",
+    Content = "- Aimbot\n- End game\n- Teleport (minha seção)\n- Visão\n- Sistema principal (exceto voo)\n- Train"
 })
