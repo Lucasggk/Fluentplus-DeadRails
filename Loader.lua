@@ -639,5 +639,6 @@ creditos:AddParagraph({
 
 creditos:AddParagraph({
   Title = " ",
+  TextSize = 25,
   Content = "O sistema principal (exceto a função de voo) e train também foram feitos por Lucas."
 })
