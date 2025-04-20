@@ -164,7 +164,8 @@ main:AddToggle("AutoCollectToggle", {
                     workspace.RuntimeItems:FindFirstChild("Navy Revolver"),
                     workspace.RuntimeItems:FindFirstChild("Bolt Action Rifle"),
                     workspace.RuntimeItems:FindFirstChild("Holy Water"),
-                    workspace.RuntimeItems:FindFirstChild("Electrocutioner")
+                    workspace.RuntimeItems:FindFirstChild("Electrocutioner"),
+                    workspace.RuntimeItems:FindFirstChild("Vampire Knife")
                 }
 
                 local rs = game:GetService("ReplicatedStorage")
