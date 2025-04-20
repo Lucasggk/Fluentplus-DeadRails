@@ -633,5 +633,10 @@ creditos:AddParagraph({
 
 creditos:AddParagraph({
     Title = "Créditos de Criação do Script (Lucas):",
-    Content = "As funções de aimbot, end game, teleport (da minha seção), visão, sistema principal (exceto a função de voo) e train foram desenvolvidas por Lucas."
+    Content = "As funções de aimbot, end game, teleport (da minha seção), visão, sistema principal "
 })
+
+Creditos:AddParagraph({
+  Title = "",
+  Content = "(exceto a função de voo) e train foram desenvolvidas por Lucas."
+ })
