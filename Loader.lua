@@ -224,7 +224,7 @@ local Section = main:AddSection("outros")
 
 main:AddButton({
   Title = "fly (funcional)",
-  Description = "ao clicar ativará uma ui, para funcionar voce tem que estar em uma cadeira sentado. Recomendo usar velocidade 10"
+  Description = "ao clicar ativará uma ui, para funcionar voce tem que estar em uma cadeira sentado. Recomendo usar velocidade 10",
   Callback = function()
    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Vehicle%20Fly%20Gui'))()
   end
