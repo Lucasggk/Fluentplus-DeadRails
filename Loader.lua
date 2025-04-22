@@ -4,8 +4,8 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))() 
 
 local Window = Fluent:CreateWindow({
-    Title = "Meu Script",
-    SubTitle = "By Lucas",
+    Title = "Dead Rails",
+    SubTitle = "Feito por Lucas",
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
