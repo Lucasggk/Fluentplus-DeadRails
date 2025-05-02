@@ -626,6 +626,9 @@ BondsTab:AddParagraph({
 
 
 local creditos = Window:AddTab({ Title = "Créditos", Icon = "list" })
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/hub/main/Config%20e%20Remove%20key.lua", true))()
+
+
 
 creditos:AddParagraph({
     Title = "Créditos de Criação do Script (ringtaa):",
