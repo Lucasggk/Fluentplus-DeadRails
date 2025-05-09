@@ -467,20 +467,7 @@ trainTab:AddButton({
     Title = "tp to train",
     Description = "Teleporta direto para o trem",
     Callback = function()
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/NEWTPTRAIN.github.io/refs/heads/main/TRAIN.LUA"))()      
-                end
-
-                local seat = getVehicleSeat()
-                if seat then
-                    local char = game.Players.LocalPlayer.Character
-                    if char and char:FindFirstChild("HumanoidRootPart") then
-                        char:MoveTo(seat.Position + Vector3.new(0, 5, 0))
-                    end
-                end
-
-                task.wait(0.5)
-            end
-        end)
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/NEWTPTRAIN.github.io/refs/heads/main/TRAIN.LUA"))()     
     end
 })
 
