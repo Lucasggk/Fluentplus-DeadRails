@@ -3,8 +3,6 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
  
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))() 
 
-
-
 local Window = Fluent:CreateWindow({
     Title = "Dead Rails",
     SubTitle = "Feito por Lucas",
@@ -469,17 +467,7 @@ trainTab:AddButton({
     Title = "tp to train",
     Description = "Teleporta direto para o trem",
     Callback = function()
-        task.spawn(function()
-            for i = 1, 4 do
-                local train = workspace:FindFirstChild("Train") or workspace:WaitForChild("Train")
-
-                local function getVehicleSeat()
-                    for _, v in pairs(train:GetDescendants()) do
-                        if v:IsA("VehicleSeat") then
-                            return v
-                        end
-                    end
-                    return nil
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/ringtaa/NEWTPTRAIN.github.io/refs/heads/main/TRAIN.LUA"))()      
                 end
 
                 local seat = getVehicleSeat()
