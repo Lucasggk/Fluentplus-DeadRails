@@ -2,7 +2,7 @@ repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
  
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))() 
-Button_Icon = "rbxassetid://94979807066345"
+
 local Window = Fluent:CreateWindow({
     Title = "Dead Rails",
     SubTitle = "Feito por Lucas",
